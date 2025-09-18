@@ -1,0 +1,14 @@
+/*
+CSS Module for Home component
+*/
+
+/*main container*/
+.mainCont {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.title {
+  text-align: center;
+  padding: 2rem;
+}

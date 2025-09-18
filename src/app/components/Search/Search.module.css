@@ -1,0 +1,46 @@
+/*
+CSS Module for Search component
+*/
+
+/*search container*/
+.searchCont {
+  position: relative;
+}
+
+/*search input*/
+.search {
+  background-color: var(--neutral-800);
+  color: var(--neutral-0);
+  font-size: 1rem;
+  padding: 1rem 3rem;
+}
+
+/*search input placeholder*/
+.search::placeholder {
+  color: var(--neutral-200);
+}
+
+/*serch icon*/
+.searchIcon {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/*submit button*/
+.submitBtn {
+  background-color: var(--blue-500);
+  color: var(--neutral-0);
+  font-size: 1rem;
+  padding: 1rem 3rem;
+  margin-top: 1rem;
+}
+
+.search,
+.submitBtn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+}

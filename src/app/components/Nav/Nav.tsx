@@ -1,6 +1,6 @@
 import styles from "./Nav.module.css";
 import Image from "next/image";
-import Units from "../UnitsPopUp/Units";
+import Units from "../UnitsPopUp/Units/Units";
 
 /**
  * Renders nav with Weather Now logo and Units component

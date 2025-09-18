@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./Units.module.css";
 import Image from "next/image";
-import UnitOption from "./UnitOption/UnitOption";
+import UnitOption from "../UnitOption/UnitOption";
 
 /**
  * Renders Unit (Metric/Imperial) toggle pop up

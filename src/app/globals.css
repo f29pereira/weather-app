@@ -36,6 +36,10 @@ body {
   font-family: var(--font-dm-sans);
 }
 
+h1 {
+  font-family: var(--font-bricolage-grotesque);
+}
+
 h2,
 h3 {
   color: var(--neutral-0);
