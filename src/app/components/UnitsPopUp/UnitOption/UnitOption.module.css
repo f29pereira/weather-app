@@ -1,0 +1,23 @@
+/*
+CSS Module for UnitOption component
+*/
+
+.unit {
+  font-size: 0.7rem;
+  padding: 0.5rem 0.375rem; /*8px 6px*/
+}
+
+/*unit selected background*/
+.unitSelected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--neutral-700);
+  border-radius: 12px;
+}
+
+/*checkmark icon*/
+.checkmark {
+  width: 14px;
+  height: 17px;
+}

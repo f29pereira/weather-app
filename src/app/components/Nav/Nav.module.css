@@ -1,0 +1,17 @@
+/*
+CSS module for Nav component
+*/
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+/*Weather Now logo*/
+.logoImg {
+  width: 150;
+  height: 33px;
+  margin-right: auto;
+}
