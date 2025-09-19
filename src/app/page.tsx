@@ -2,11 +2,11 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Search from "./components/Search/Search";
 import Temperature from "./components/Cards/TemperatureCard/Temperature";
-import ForeCastList from "./components/Cards/ForeCastCard/ForeCastList/ForeCastList";
-import { DayForeCastProps } from "./components/types";
+import ForecastList from "./components/Cards/Forecast/ForecastList/ForecastList";
+import { DayForecastProps } from "./components/types";
 
 export default function Home() {
-  const foreCastList: DayForeCastProps[] = [
+  const forecastList: DayForecastProps[] = [
     {
       day: "Tue",
       imgTemp: "/images/icons/icon-rain.webp",
@@ -69,7 +69,7 @@ export default function Home() {
         precipitation="0 mm"
       />
 
-      <ForeCastList foreCastList={foreCastList} />
+      <ForecastList forecastList={forecastList} />
     </main>
   );
 }

@@ -3,7 +3,7 @@ CSS Module for DayForeCast component
 */
 
 /*day forecast container*/
-.dayForeCastCont {
+.dayForecastCont {
   background-color: var(--neutral-800);
   border: 1px solid var(--neutral-600);
   border-radius: 12px;

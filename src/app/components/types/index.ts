@@ -38,7 +38,7 @@ export type TemperatureProps = {
 /**
  * Props for the DayForeCast component
  */
-export type DayForeCastProps = {
+export type DayForecastProps = {
   //day of the week
   day: string;
 
@@ -55,7 +55,7 @@ export type DayForeCastProps = {
 /**
  * Props for the ForeCastList component
  */
-export type ForeCastListProps = {
+export type ForecastListProps = {
   //list of DayForeCast components
-  foreCastList: DayForeCastProps[];
+  forecastList: DayForecastProps[];
 };

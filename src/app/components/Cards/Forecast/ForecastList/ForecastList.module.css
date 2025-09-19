@@ -3,7 +3,7 @@ CSS Module for ForeCastList component
 */
 
 /*forecast list section*/
-.foreCastSec {
+.forecastSec {
   margin-top: 2rem;
 }
 
@@ -14,7 +14,7 @@ CSS Module for ForeCastList component
 }
 
 /*forecast grid*/
-.foreCastGrid {
+.forecastGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -22,7 +22,7 @@ CSS Module for ForeCastList component
 
 @media (min-width: 48rem /*768px*/) {
   /*forecast grid*/
-  .foreCastGrid {
+  .forecastGrid {
     grid-template-columns: repeat(7, 1fr);
   }
 }

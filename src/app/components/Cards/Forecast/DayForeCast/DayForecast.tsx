@@ -1,5 +1,5 @@
-import styles from "./DayForeCast.module.css";
-import type { DayForeCastProps } from "@/app/components/types";
+import styles from "./DayForecast.module.css";
+import type { DayForecastProps } from "@/app/components/types";
 import Image from "next/image";
 
 /**
@@ -9,16 +9,16 @@ import Image from "next/image";
  * max temperature
  * min temperature
  *
- * Props are defined in {@link DayForeCastProps}.
+ * Props are defined in {@link DayForecastProps}.
  */
-export default function DayForeCast({
+export default function DayForecast({
   day,
   imgTemp,
   maxTemp,
   minTemp,
-}: DayForeCastProps) {
+}: DayForecastProps) {
   return (
-    <div className={`flex-col-center ${styles.dayForeCastCont}`}>
+    <div className={`flex-col-center ${styles.dayForecastCont}`}>
       {/*Day of the week*/}
       <h3 className={styles.title}>{day}</h3>
 
