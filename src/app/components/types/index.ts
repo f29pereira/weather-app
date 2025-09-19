@@ -59,3 +59,24 @@ export type ForecastListProps = {
   //list of DayForeCast components
   forecastList: DayForecastProps[];
 };
+
+/**
+ * Props for the HourForecast component
+ */
+export type HourForecastProps = {
+  //weather icon path
+  imgTemp: string;
+
+  //hour
+  hour: string;
+
+  //temperature
+  temperature: string;
+};
+
+/**
+ * Props for the HourlyForecastList component
+ */
+export type HourlyForecastListProps = {
+  hourlyForecastList: HourForecastProps[];
+};

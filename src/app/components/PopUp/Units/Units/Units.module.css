@@ -26,14 +26,13 @@ CSS Module for Units component
   position: absolute;
   top: 100%;
   right: 0;
-  bottom: 0;
   width: 9rem; /*144px*/
   height: 20.5rem; /*328px*/
   background-color: var(--neutral-800);
   border: 1px solid var(--neutral-600);
   border-radius: 12px;
   padding: 0.5rem 0.375rem; /*8px 6px*/
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   z-index: 1000;
 }
 

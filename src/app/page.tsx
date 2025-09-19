@@ -2,8 +2,9 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Search from "./components/Search/Search";
 import Temperature from "./components/Cards/TemperatureCard/Temperature";
-import ForecastList from "./components/Cards/Forecast/ForecastList/ForecastList";
-import { DayForecastProps } from "./components/types";
+import ForecastList from "./components/Cards/Forecast/DailyForecast/ForecastList/ForecastList";
+import { DayForecastProps, HourForecastProps } from "./components/types";
+import HourlyForecastList from "./components/Cards/Forecast/HourlyForecast/HourlyForecastList/HourlyForecastList";
 
 export default function Home() {
   const forecastList: DayForecastProps[] = [
@@ -51,6 +52,49 @@ export default function Home() {
     },
   ];
 
+  const hourlyList: HourForecastProps[] = [
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "3 PM",
+      temperature: "20°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "4 PM",
+      temperature: "20°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "5 PM",
+      temperature: "20°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "6 PM",
+      temperature: "20°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "7 PM",
+      temperature: "19°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "8 PM",
+      temperature: "18°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "9 PM",
+      temperature: "17°",
+    },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "10 PM",
+      temperature: "17°",
+    },
+  ];
+
   return (
     <main className={styles.mainCont}>
       <header>
@@ -70,6 +114,8 @@ export default function Home() {
       />
 
       <ForecastList forecastList={forecastList} />
+
+      <HourlyForecastList hourlyForecastList={hourlyList} />
     </main>
   );
 }

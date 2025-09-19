@@ -1,0 +1,57 @@
+/*
+CSS Module for Days component
+*/
+
+/*current selected day container*/
+.daysCont {
+  position: relative;
+  background-color: var(--neutral-600);
+  border-radius: 8px;
+  box-shadow: 0 4px 4px 0 var(--shadow); /*offset-x offset-y blur spread color*/
+  padding: 0.5rem;
+}
+
+/*current selected day text*/
+.selectedDay {
+  font-size: var(--font-16px);
+}
+
+/*day and drop down img container*/
+.dayImgCont {
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 8rem; /*128px*/
+}
+
+/*pop up container*/
+.popUpCont {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 13.375rem; /*214px*/
+  height: 19.5625rem; /*313px*/
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/*select days container*/
+.daysCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--neutral-800);
+  border: 1px solid var(--neutral-600);
+}
+
+/*week day*/
+.day {
+  font-size: var(--font-16px);
+  cursor: pointer;
+  padding: 0.4rem 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.day:hover {
+  background-color: var(--neutral-700);
+  border-radius: 8px;
+}

@@ -36,5 +36,5 @@ CSS Module for DayForeCast component
 
 .maxTemp,
 .minTemp {
-  font-size: 1rem;
+  font-size: var(--font-16px);
 }

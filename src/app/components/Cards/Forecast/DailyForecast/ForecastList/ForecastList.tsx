@@ -1,6 +1,6 @@
 import styles from "./ForecastList.module.css";
 import type { ForecastListProps } from "@/app/components/types";
-import DayForecast from "../DayForeCast/DayForecast";
+import DayForecast from "../DayForecast/DayForecast";
 
 /**
  * Renders grid of DayForeCast components

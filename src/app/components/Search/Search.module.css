@@ -11,7 +11,7 @@ CSS Module for Search component
 .search {
   background-color: var(--neutral-800);
   color: var(--neutral-0);
-  font-size: 1rem;
+  font-size: var(--font-16px);
   padding: 1rem 3rem;
   cursor: pointer;
 }
@@ -38,7 +38,7 @@ CSS Module for Search component
 .submitBtn {
   background-color: var(--blue-500);
   color: var(--neutral-0);
-  font-size: 1rem;
+  font-size: var(--font-16px);
   padding: 1rem 3rem;
   margin-top: 1rem;
   cursor: pointer;

@@ -1,6 +1,6 @@
 import styles from "./UnitOption.module.css";
 import Image from "next/image";
-import type { UnitOptionProps } from "../../types";
+import type { UnitOptionProps } from "../../../types";
 
 /**
  * Renders a unit with a checkmark if it is selected

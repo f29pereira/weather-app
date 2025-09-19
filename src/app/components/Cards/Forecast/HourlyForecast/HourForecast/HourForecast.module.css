@@ -1,0 +1,32 @@
+/*
+CSS Module for HourForecast component
+*/
+
+/*hour forecast container*/
+.hourForecastCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--neutral-700);
+  border: 1px solid var(--neutral-600);
+  border-radius: 12px;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+/*weather icon image*/
+.imgWeather {
+  width: 40px;
+  height: 40px;
+}
+
+/*hour text*/
+.hour {
+  font-size: var(--font-20px);
+}
+
+/*temperature text*/
+.temperature {
+  font-size: var(--font-16px);
+}
