@@ -8,3 +8,26 @@ export type UnitOptionProps = {
   //Is Unit selected
   isSelected: boolean;
 };
+
+export type TemperatureProps = {
+  //location
+  location: string;
+
+  //date
+  date: string;
+
+  //temperature value
+  temperature: string;
+
+  //feels like temperature value
+  feelTemperature: string;
+
+  //humidity
+  humidity: string;
+
+  //wind
+  wind: string;
+
+  //precipitation
+  precipitation: string;
+};

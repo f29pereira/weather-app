@@ -51,3 +51,11 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+/*Centered flex column container*/
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
