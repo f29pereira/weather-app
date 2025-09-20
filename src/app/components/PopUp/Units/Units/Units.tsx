@@ -31,14 +31,14 @@ export default function Units() {
       {/*Units Toggle*/}
       <div className={`flex-center ${styles.gap}`} onClick={togglePopUp}>
         <Image
-          src="/images/icons/icon-units.svg"
+          src="images/icons/icon-units.svg"
           width={16}
           height={16}
           alt=""
         />
         <span className={styles.description}>Units</span>
         <Image
-          src="/images/icons/icon-dropdown.svg"
+          src="images/icons/icon-dropdown.svg"
           width={16}
           height={16}
           alt=""

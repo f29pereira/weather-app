@@ -11,7 +11,7 @@ export default function Nav() {
       {/*Logo*/}
       <Image
         className={styles.logoImg}
-        src="/images/logo.svg"
+        src="images/logo.svg"
         width={197}
         height={40}
         alt="Weather Now Logo"

@@ -34,7 +34,7 @@ export default function Temperature({
             {/*Icon*/}
             <Image
               className={styles.tempIcon}
-              src="/images/icons/icon-sunny.webp"
+              src="images/icons/icon-sunny.webp"
               width={48}
               height={48}
               alt=""

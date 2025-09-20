@@ -34,7 +34,7 @@ export default function Search() {
             {/*Search icon*/}
             <Image
               className={styles.searchIcon}
-              src="/images/icons/icon-search.svg"
+              src="images/icons/icon-search.svg"
               width={16}
               height={16}
               alt=""
