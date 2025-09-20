@@ -6,9 +6,25 @@ CSS Module for Weather component
   padding: 2rem;
 }
 
-@media (min-width: 1000px) {
-  /*weather data container*/
+/* Desktop layout */
+@media (min-width: 87.5rem /*1400px*/) {
+  .title {
+    font-size: 3.25rem; /*52px*/
+  }
+
+  /* grid container */
   .weatherDataCont {
-    display: flex;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr;
+    gap: 2rem;
+    max-height: 715px;
+    margin-top: 3rem;
+  }
+
+  /*second grid item*/
+  .hourlyCont {
+    height: 100%;
+    overflow: hidden;
   }
 }

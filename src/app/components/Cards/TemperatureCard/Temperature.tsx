@@ -19,7 +19,7 @@ export default function Temperature({
   precipitation,
 }: TemperatureProps) {
   return (
-    <div className="flex-col-center">
+    <div>
       {/*Main temperature card*/}
       <div className={styles.tempCardBg}>
         <div className={styles.tempCardCont}>

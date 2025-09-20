@@ -95,6 +95,11 @@ export default function Weather() {
       hour: "10 PM",
       temperature: "17°",
     },
+    {
+      imgTemp: "/images/icons/icon-sunny.webp",
+      hour: "11 PM",
+      temperature: "17°",
+    },
   ];
 
   return (
@@ -106,7 +111,7 @@ export default function Weather() {
       <Search />
 
       <div className={styles.weatherDataCont}>
-        <div>
+        <div className={styles.tempsDailyCont}>
           <Temperature
             location="Berlin, Germany"
             date="Tuesday, Aug 5, 2025"
@@ -120,7 +125,9 @@ export default function Weather() {
           <ForecastList forecastList={forecastList} />
         </div>
 
-        <HourlyForecastList hourlyForecastList={hourlyList} />
+        <div className={styles.hourlyCont}>
+          <HourlyForecastList hourlyForecastList={hourlyList} />
+        </div>
       </div>
     </section>
   );

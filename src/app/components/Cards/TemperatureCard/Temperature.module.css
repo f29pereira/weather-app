@@ -112,3 +112,15 @@ CSS Module for Temperature component
     grid-template-rows: repeat(1, 1fr);
   }
 }
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*temperature card background image*/
+  .tempCardBg {
+    margin-top: 0;
+  }
+
+  /*information grid*/
+  .infoGrid {
+    gap: 1.5rem;
+  }
+}
