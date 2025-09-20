@@ -21,3 +21,9 @@ CSS Module for UnitOption component
   width: 14px;
   height: 17px;
 }
+
+@media (min-width: 87.5rem /*1400px*/) {
+  .unit {
+    font-size: 1rem;
+  }
+}

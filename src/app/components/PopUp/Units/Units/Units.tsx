@@ -28,6 +28,7 @@ export default function Units() {
 
   return (
     <div className={styles.unitCont}>
+      {/*Units Toggle*/}
       <div className={`flex-center ${styles.gap}`} onClick={togglePopUp}>
         <Image
           src="/images/icons/icon-units.svg"

@@ -11,7 +11,19 @@ CSS module for Nav component
 
 /*Weather Now logo*/
 .logoImg {
-  width: 150;
+  width: 150px;
   height: 33px;
   margin-right: auto;
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  .nav {
+    padding: 2rem 8rem;
+  }
+
+  /*Weather Now logo*/
+  .logoImg {
+    width: 186px;
+    height: 40px;
+  }
 }

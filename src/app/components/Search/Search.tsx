@@ -13,7 +13,7 @@ export default function Search() {
   };
 
   return (
-    <section>
+    <section className={styles.searchSec}>
       <Form action={search}>
         <div className={styles.formCont}>
           <div className={styles.searchCont}>

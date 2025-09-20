@@ -75,3 +75,16 @@ CSS Module for Search component
     flex: 0;
   }
 }
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*search section*/
+  .searchSec {
+    margin-bottom: 2rem;
+  }
+
+  /*search form container*/
+  .formCont {
+    width: 40%;
+    margin: 0 auto;
+  }
+}

@@ -65,3 +65,22 @@ CSS Module for Units component
   border: 1px solid var(--neutral-600);
   margin: 0.5rem 0;
 }
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*Unit text*/
+  .description {
+    font-size: 1rem;
+  }
+
+  /*select units container*/
+  .selectUnitsCont {
+    width: 12rem; /*192px*/
+    height: 24rem; /*384px*/
+  }
+
+  .title,
+  .unitTitle,
+  .unitCont {
+    font-size: 1rem;
+  }
+}
