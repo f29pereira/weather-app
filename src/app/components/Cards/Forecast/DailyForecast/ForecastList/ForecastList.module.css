@@ -1,0 +1,28 @@
+/*
+CSS Module for ForeCastList component
+*/
+
+/*forecast list section*/
+.forecastSec {
+  margin-top: 2rem;
+}
+
+/*forecast title*/
+.title {
+  font-size: var(--font-20px);
+  margin-bottom: 1rem;
+}
+
+/*forecast grid*/
+.forecastGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 48rem /*768px*/) {
+  /*forecast grid*/
+  .forecastGrid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}

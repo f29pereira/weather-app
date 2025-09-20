@@ -1,0 +1,30 @@
+/*
+CSS Module for Weather component
+*/
+.title {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Desktop layout */
+@media (min-width: 87.5rem /*1400px*/) {
+  .title {
+    font-size: 3.25rem; /*52px*/
+  }
+
+  /* grid container */
+  .weatherDataCont {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr;
+    gap: 2rem;
+    max-height: 715px;
+    margin-top: 3rem;
+  }
+
+  /*second grid item*/
+  .hourlyCont {
+    height: 100%;
+    overflow: hidden;
+  }
+}

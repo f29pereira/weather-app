@@ -1,0 +1,90 @@
+/*
+CSS Module for Search component
+*/
+
+/*search input and icon container*/
+.searchCont {
+  position: relative;
+}
+
+/*search input*/
+.search {
+  background-color: var(--neutral-800);
+  color: var(--neutral-0);
+  font-size: var(--font-16px);
+  padding: 1rem 3rem;
+  cursor: pointer;
+}
+
+.search:hover {
+  background-color: var(--neutral-700);
+}
+
+/*search input placeholder*/
+.search::placeholder {
+  color: var(--neutral-200);
+}
+
+/*serch icon*/
+.searchIcon {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/*submit button*/
+.submitBtn {
+  background-color: var(--blue-500);
+  color: var(--neutral-0);
+  font-size: var(--font-16px);
+  padding: 1rem 3rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: var(--blue-700);
+}
+
+.search,
+.submitBtn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+@media (min-width: 48rem /*768px*/) {
+  /*search form container*/
+  .formCont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /*search input and icon container*/
+  .searchCont {
+    flex: 1;
+  }
+
+  /*submit button*/
+  .submitBtn {
+    margin: 0;
+    flex: 0;
+  }
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*search section*/
+  .searchSec {
+    margin-bottom: 2rem;
+  }
+
+  /*search form container*/
+  .formCont {
+    width: 40%;
+    margin: 0 auto;
+  }
+}

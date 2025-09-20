@@ -1,0 +1,39 @@
+/*
+CSS Module for HourlyForecastList component
+*/
+
+/*hourly forecast section*/
+.forecastSec {
+  background-color: var(--neutral-800);
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+
+/*title and day pop up container*/
+.titlePopupCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/*forecast title*/
+.title {
+  font-size: var(--font-20px);
+}
+
+/*hourly forecast container*/
+.hourlyForeCastCont {
+  gap: 1rem;
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*hourly forecast section*/
+  .forecastSec {
+    margin: 0;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+}

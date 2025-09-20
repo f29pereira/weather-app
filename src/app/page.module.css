@@ -1,0 +1,15 @@
+/*
+CSS Module for Home component
+*/
+
+/*main container*/
+.mainCont {
+  padding: 1rem;
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*main container*/
+  .mainCont {
+    padding: 0.5rem 8rem 3rem 8rem;
+  }
+}

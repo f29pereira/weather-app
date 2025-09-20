@@ -1,0 +1,126 @@
+/*
+CSS Module for Temperature component
+*/
+
+/*temperature card background image*/
+.tempCardBg {
+  background-image: url("images/background/bg-today-small.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  overflow: hidden;
+  margin: 2rem 0 1.5rem 0;
+}
+
+/*temperature card container*/
+.tempCardCont {
+  padding: 2.5rem 1rem;
+}
+
+/*temperature location*/
+.location {
+  font-size: 1.75rem; /*28px*/
+}
+
+/*current date*/
+.date {
+  font-size: 18px;
+  opacity: 80%;
+  margin-top: 0.5rem;
+}
+
+.location,
+.date {
+  text-align: center;
+}
+
+/*icon and temperature container*/
+.iconTempCont {
+  margin-top: 1.2rem;
+  gap: 0.5rem;
+}
+
+/*temperature icon*/
+.tempIcon {
+  width: 120px;
+  height: 120px;
+}
+
+/*temperature*/
+.temperature {
+  font-size: 6rem; /*96px*/
+  font-style: italic;
+}
+
+/*information grid*/
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+/*information card*/
+.infoCard {
+  background-color: var(--neutral-800);
+  border-radius: 12px;
+  border: 1px solid var(--neutral-600);
+  padding: 1rem;
+}
+
+/*information card title*/
+.infoTitle {
+  color: var(--neutral-200);
+  font-size: 1.125rem; /*18px*/
+  margin-bottom: 1rem;
+}
+
+/*information card value*/
+.infoValue {
+  font-size: 2rem; /*32px*/
+}
+
+@media (min-width: 48rem /*768px*/) {
+  /*temperature card background image*/
+  .tempCardBg {
+    background-image: url("images/background/bg-today-large.svg");
+    aspect-ratio: 400/143; /*original img aspect ratio*/
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /*temperature card container*/
+  .tempCardCont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 2.5rem 2rem;
+  }
+
+  /*temperature card title container*/
+  .tempCardTitleCont {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /*information grid*/
+  .infoGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*temperature card background image*/
+  .tempCardBg {
+    margin-top: 0;
+  }
+
+  /*information grid*/
+  .infoGrid {
+    gap: 1.5rem;
+  }
+}

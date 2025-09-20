@@ -1,0 +1,74 @@
+/*
+Global CSS Styles
+*/
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  /*Fonts*/
+  --font-bricolage-grotesque: "Bricolage Grotesque", sans-serif;
+  --font-dm-sans: "DM Sans", sans-serif;
+
+  /*Colors*/
+  /*Neutral*/
+  --neutral-900: hsl(243, 96%, 9%);
+  --neutral-800: hsl(243, 27%, 20%);
+  --neutral-700: hsl(243, 23%, 24%);
+  --neutral-600: hsl(243, 23%, 30%);
+  --neutral-300: hsl(240, 6%, 70%);
+  --neutral-200: hsl(250, 6%, 84%);
+  --neutral-0: hsl(0, 0%, 100%);
+  /*Orange*/
+  --orange-500: hsl(28, 100%, 52%);
+  /*Blue*/
+  --blue-500: hsl(233, 67%, 56%);
+  --blue-700: hsl(248, 70%, 36%);
+  /*Shadow*/
+  --shadow: rgba(0, 0, 0, 0.25);
+  /*Text*/
+  --font-16px: 1rem;
+  --font-20px: 1.25rem;
+}
+
+body {
+  background-color: var(--neutral-900);
+  color: var(--neutral-0);
+  font-family: var(--font-dm-sans);
+}
+
+h1 {
+  font-family: var(--font-bricolage-grotesque);
+}
+
+h2,
+h3 {
+  color: var(--neutral-0);
+}
+
+/*Available for screen readers*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/*Centered flex row container*/
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Centered flex column container*/
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
