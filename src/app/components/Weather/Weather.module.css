@@ -1,0 +1,14 @@
+/*
+CSS Module for Weather component
+*/
+.title {
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (min-width: 1000px) {
+  /*weather data container*/
+  .weatherDataCont {
+    display: flex;
+  }
+}

@@ -15,27 +15,37 @@ export default function Search() {
   return (
     <section>
       <Form action={search}>
-        <div className={styles.searchCont}>
-          <input
-            className={styles.search}
-            type="search"
-            name=""
-            id=""
-            placeholder="Search for a place..."
-          />
+        <div className={styles.formCont}>
+          <div className={styles.searchCont}>
+            {/*Search label*/}
+            <label className="sr-only" htmlFor="searchInput">
+              Search
+            </label>
 
-          <Image
-            className={styles.searchIcon}
-            src="/images/icons/icon-search.svg"
-            width={16}
-            height={16}
-            alt=""
-          />
+            {/*Search input*/}
+            <input
+              className={styles.search}
+              type="search"
+              name="searchInput"
+              id="searchInput"
+              placeholder="Search for a place..."
+            />
+
+            {/*Search icon*/}
+            <Image
+              className={styles.searchIcon}
+              src="/images/icons/icon-search.svg"
+              width={16}
+              height={16}
+              alt=""
+            />
+          </div>
+
+          {/*Search button*/}
+          <button className={styles.submitBtn} type="submit">
+            Search
+          </button>
         </div>
-
-        <button className={styles.submitBtn} type="submit">
-          Search
-        </button>
       </Form>
     </section>
   );

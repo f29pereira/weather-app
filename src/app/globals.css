@@ -49,6 +49,15 @@ h3 {
   color: var(--neutral-0);
 }
 
+/*Available for screen readers*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 /*Centered flex row container*/
 .flex-center {
   display: flex;

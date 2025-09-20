@@ -2,7 +2,7 @@
 CSS Module for Search component
 */
 
-/*search container*/
+/*search input and icon container*/
 .searchCont {
   position: relative;
 }
@@ -53,4 +53,25 @@ CSS Module for Search component
   width: 100%;
   border: none;
   border-radius: 10px;
+}
+
+@media (min-width: 48rem /*768px*/) {
+  /*search form container*/
+  .formCont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /*search input and icon container*/
+  .searchCont {
+    flex: 1;
+  }
+
+  /*submit button*/
+  .submitBtn {
+    margin: 0;
+    flex: 0;
+  }
 }
