@@ -4,7 +4,7 @@ CSS Module for Temperature component
 
 /*temperature card background image*/
 .tempCardBg {
-  background-image: url("images/background/bg-today-small.svg");
+  background-image: url("/images/background/bg-today-small.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -85,7 +85,7 @@ CSS Module for Temperature component
 @media (min-width: 48rem /*768px*/) {
   /*temperature card background image*/
   .tempCardBg {
-    background-image: url("images/background/bg-today-large.svg");
+    background-image: url("/images/background/bg-today-large.svg");
     aspect-ratio: 400/143; /*original img aspect ratio*/
     max-width: 100%;
     max-height: 100%;
