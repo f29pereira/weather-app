@@ -105,7 +105,7 @@ export default function Weather() {
   return (
     <section>
       <header>
-        <h1 className={styles.title}>How's the sky looking today?</h1>
+        <h1 className={styles.title}>How&apos;s the sky looking today?</h1>
       </header>
 
       <Search />
