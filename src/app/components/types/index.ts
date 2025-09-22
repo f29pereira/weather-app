@@ -78,5 +78,34 @@ export type HourForecastProps = {
  * Props for the HourlyForecastList component
  */
 export type HourlyForecastListProps = {
+  //list of HourForecast components
   hourlyForecastList: HourForecastProps[];
+};
+
+/**
+ * Props for the Error component
+ */
+export type ErrorProps = {
+  //error title
+  title: string;
+
+  //error message
+  message: string;
+};
+
+/**
+ * WeatherContext
+ */
+export type WeatherContextType = {
+  //indicates if the app is searching
+  isSearching: boolean;
+  setIsSearching: React.Dispatch<React.SetStateAction<boolean>>;
+
+  //indicates if the user input location coordinates have been found
+  isLocationFound: boolean | null;
+  setIsLocationFound: React.Dispatch<React.SetStateAction<boolean | null>>;
+
+  //indicates if something went wrong during data fetching
+  error: ErrorProps | null;
+  setError: React.Dispatch<React.SetStateAction<ErrorProps | null>>;
 };

@@ -1,0 +1,89 @@
+/*
+CSS Module for Error component
+*/
+
+/*error section*/
+.errorSec {
+  margin-top: 1rem;
+}
+
+/*error icon*/
+.errorIcon {
+  width: 30px;
+  height: 30px;
+}
+
+/*error title*/
+.title {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+/*error message*/
+.message {
+  font-size: 1rem;
+  color: var(--neutral-200);
+  max-width: 18.75rem; /*300px*/
+  margin-bottom: 2rem;
+}
+
+/*retry icon*/
+.tempIcon {
+  width: 15px;
+  height: 15px;
+}
+
+/*retry button*/
+.retryBtn {
+  background-color: var(--neutral-600);
+  font-weight: bold;
+  color: var(--neutral-0);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.8rem 1.4rem;
+}
+
+.retryBtn:hover {
+  background-color: var(--neutral-700);
+}
+
+/*retry button content gap*/
+.gap {
+  gap: 0.5rem;
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*error icon*/
+  .errorIcon {
+    width: 42px;
+    height: 50px;
+  }
+
+  /*error title*/
+  .title {
+    font-size: 3.25rem; /*52px*/
+  }
+
+  /*error message*/
+  .message {
+    font-size: 1.25rem; /*20px*/
+    max-width: 34.375rem; /*550px*/
+  }
+
+  /*retry button content gap*/
+  .gap {
+    gap: 1rem;
+  }
+
+  /*retry icon*/
+  .tempIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /*retry button*/
+  .retryBtn {
+    font-size: 1rem;
+  }
+}
