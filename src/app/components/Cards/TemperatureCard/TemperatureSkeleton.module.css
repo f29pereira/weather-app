@@ -1,0 +1,58 @@
+/*
+CSS Module for TemperatureSkeleton component
+*/
+
+/*temperature card background*/
+.tempCardBgLoading {
+  background-color: var(--neutral-800);
+  height: 18.375rem; /*294px*/
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 2rem 0 1.5rem 0;
+}
+
+/*loading icon container*/
+.loadingIconCont {
+  animation: rotate 5s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*loading icon*/
+.loadingIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/*loading text*/
+.loadingText {
+  color: var(--neutral-200);
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*temperature card background*/
+  .tempCardBgLoading {
+    width: 60.375rem; /*966px*/
+    height: 21.5625rem; /*345px*/
+    margin-top: 0;
+  }
+
+  /*loading icon*/
+  .loadingIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  /*loading text*/
+  .loadingText {
+    font-size: 1.125rem; /*18px*/
+  }
+}

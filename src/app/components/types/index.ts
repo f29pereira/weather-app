@@ -26,7 +26,12 @@ export type TemperatureProps = {
 
   //temperature value
   temperature: string;
+};
 
+/**
+ * Props for the Info component
+ */
+export type WeatherInfoProps = {
   //feels like temperature value
   feelTemperature: string;
 

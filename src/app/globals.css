@@ -29,6 +29,7 @@ Global CSS Styles
   --blue-700: hsl(248, 70%, 36%);
   /*Shadow*/
   --shadow: rgba(0, 0, 0, 0.25);
+
   /*Text*/
   --font-16px: 1rem;
   --font-20px: 1.25rem;
@@ -47,6 +48,10 @@ h1 {
 h2,
 h3 {
   color: var(--neutral-0);
+}
+
+.text-center {
+  text-align: center;
 }
 
 /*Available for screen readers*/
