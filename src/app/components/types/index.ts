@@ -1,3 +1,5 @@
+import type { Weather } from "@/app/utils/utils";
+
 /**
  * Props for the UnitOption component
  */
@@ -18,6 +20,9 @@ export type TemperatureProps = {
 
   //date
   date: string;
+
+  //weather icon path
+  weatherIconPath: string;
 
   //temperature value
   temperature: string;
@@ -97,15 +102,32 @@ export type ErrorProps = {
  * WeatherContext
  */
 export type WeatherContextType = {
-  //indicates if the app is searching
-  isSearching: boolean;
-  setIsSearching: React.Dispatch<React.SetStateAction<boolean>>;
-
   //indicates if the user input location coordinates have been found
   isLocationFound: boolean | null;
   setIsLocationFound: React.Dispatch<React.SetStateAction<boolean | null>>;
 
+  //indicates if the weather data is loading
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+
   //indicates if something went wrong during data fetching
   error: ErrorProps | null;
   setError: React.Dispatch<React.SetStateAction<ErrorProps | null>>;
+
+  //weather data
+  weatherData: WeatherData | null;
+  fetchWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
+};
+
+/**
+ * Weather data
+ */
+export type WeatherData = {
+  description: string;
+  date: string;
+
+  weather: Weather[];
+
+  //TO DO - daily forecast
+  //TO DO - hourly forecast
 };
