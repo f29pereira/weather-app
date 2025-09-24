@@ -1,9 +1,15 @@
+"use client"; //Client component
+
 import styles from "./Weather.module.css";
 import Search from "../Search/Search";
 import Temperature from "../Cards/TemperatureCard/Temperature";
+import TemperatureSkeleton from "../Cards/TemperatureCard/TemperatureSkeleton";
+import WeatherInfo from "../Cards/WeatherInfo/WeatherInfo";
 import ForecastList from "../Cards/Forecast/DailyForecast/ForecastList/ForecastList";
 import HourlyForecastList from "../Cards/Forecast/HourlyForecast/HourlyForecastList/HourlyForecastList";
 import { DayForecastProps, HourForecastProps } from "../types";
+import { useWeather } from "../hooks/useWeather";
+import Error from "../Error/Error";
 
 /**
  * Renders weather related components
@@ -102,33 +108,83 @@ export default function Weather() {
     },
   ];
 
+  const { isLocationFound, isLoading, error, weatherData, isMetric } =
+    useWeather();
+
+  const dataIndex = isMetric ? 0 : 1; //weatherData.weather index (0 - metric / 1 - imperial)
+
+  if (error) {
+    return <Error title={error?.title} message={error?.message} />;
+  }
+
   return (
     <section>
       <header>
-        <h1 className={styles.title}>How&apos;s the sky looking today?</h1>
+        <h1 className={`text-center ${styles.title}`}>
+          How&apos;s the sky looking today?
+        </h1>
       </header>
 
       <Search />
 
-      <div className={styles.weatherDataCont}>
-        <div className={styles.tempsDailyCont}>
-          <Temperature
-            location="Berlin, Germany"
-            date="Tuesday, Aug 5, 2025"
-            temperature="28°"
-            feelTemperature="18°"
-            humidity="46%"
-            wind="14 km/h"
-            precipitation="0 mm"
-          />
-
-          <ForecastList forecastList={forecastList} />
+      {isLocationFound === false ? (
+        <div className={styles.notFoundCont}>
+          <p className={`text-center ${styles.notFoundText}`}>
+            No search result found!
+          </p>
         </div>
+      ) : null}
 
-        <div className={styles.hourlyCont}>
-          <HourlyForecastList hourlyForecastList={hourlyList} />
+      {isLocationFound === true ? (
+        <div className={styles.weatherDataCont}>
+          <div className={styles.tempsDailyCont}>
+            {isLoading ? (
+              <TemperatureSkeleton />
+            ) : (
+              <Temperature
+                location={weatherData ? weatherData.description : ""}
+                date={weatherData ? weatherData.date : ""}
+                weatherIconPath={
+                  weatherData ? weatherData.weather[dataIndex].weatherImg : ""
+                }
+                temperature={
+                  weatherData ? weatherData.weather[dataIndex].temperature : ""
+                }
+              />
+            )}
+
+            {isLoading ? (
+              <WeatherInfo
+                feelTemperature="-"
+                humidity="-"
+                wind="-"
+                precipitation="-"
+              />
+            ) : (
+              <WeatherInfo
+                feelTemperature={
+                  weatherData ? weatherData.weather[dataIndex].feels_like : ""
+                }
+                humidity={
+                  weatherData ? weatherData.weather[dataIndex].humidity : ""
+                }
+                wind={weatherData ? weatherData.weather[dataIndex].wind : ""}
+                precipitation={
+                  weatherData
+                    ? weatherData.weather[dataIndex].precipitation
+                    : ""
+                }
+              />
+            )}
+
+            <ForecastList forecastList={forecastList} />
+          </div>
+
+          <div className={styles.hourlyCont}>
+            <HourlyForecastList hourlyForecastList={hourlyList} />
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }

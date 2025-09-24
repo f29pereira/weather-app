@@ -122,6 +122,10 @@ export type WeatherContextType = {
   //weather data
   weatherData: WeatherData | null;
   fetchWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
+
+  //indicates if current unit is metric
+  isMetric: boolean;
+  setIsMetric: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 /**
