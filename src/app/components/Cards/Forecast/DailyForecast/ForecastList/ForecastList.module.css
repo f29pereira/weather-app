@@ -20,7 +20,7 @@ CSS Module for ForeCastList component
   gap: 1rem;
 }
 
-@media (min-width: 48rem /*768px*/) {
+@media (min-width: 87.5rem /*1400px*/) {
   /*forecast grid*/
   .forecastGrid {
     grid-template-columns: repeat(7, 1fr);

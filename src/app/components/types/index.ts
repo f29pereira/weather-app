@@ -2,141 +2,143 @@ import type { Weather } from "@/app/utils/utils";
 
 /**
  * Props for the UnitOption component
+ * @property text        - unit description
+ * @property isSelected  - is the unit selected
  */
 export type UnitOptionProps = {
-  //Unit description
   text: string;
-
-  //Is Unit selected
   isSelected: boolean;
 };
 
 /**
  * Props for the Temperature component
+ * @property location        - location
+ * @property date            - current date
+ * @property weatherIconPath - weather icon image path
+ * @property temperature     - temperature value
  */
 export type TemperatureProps = {
-  //location
   location: string;
-
-  //date
   date: string;
-
-  //weather icon path
   weatherIconPath: string;
-
-  //temperature value
   temperature: string;
 };
 
 /**
- * Props for the Info component
+ * Props for the WeatherInfo component
+ * @property feelTemperature - feels like temperature value
+ * @property humidity        - humidity value
+ * @property precipitation    - precipitation value
  */
 export type WeatherInfoProps = {
-  //feels like temperature value
   feelTemperature: string;
-
-  //humidity
   humidity: string;
-
-  //wind
   wind: string;
-
-  //precipitation
   precipitation: string;
 };
 
 /**
  * Props for the DayForeCast component
+ * @property day        - day of the week description
+ * @property weatherImg - weather icon image path
+ * @property maxTemp    - maximum daily temperature
+ * @property minTemp    - minimum daily temperature
  */
 export type DayForecastProps = {
-  //day of the week
   day: string;
-
-  //weather icon path
-  imgTemp: string;
-
-  //max temperature
+  weatherImg: string;
   maxTemp: string;
-
-  //min temperature
   minTemp: string;
 };
 
 /**
  * Props for the ForeCastList component
+ * @property forecastList  - list of DayForeCast components
  */
 export type ForecastListProps = {
-  //list of DayForeCast components
   forecastList: DayForecastProps[];
 };
 
 /**
  * Props for the HourForecast component
  */
+
+/**
+ * Props for the HourForecast component
+ * @property weatherImg  - weather icon image path
+ * @property hour        - hour value
+ * @property temperature - temperature value
+ */
 export type HourForecastProps = {
-  //weather icon path
-  imgTemp: string;
-
-  //hour
+  weatherImg: string;
   hour: string;
-
-  //temperature
   temperature: string;
 };
 
 /**
  * Props for the HourlyForecastList component
  */
+
+/**
+ * Props for the HourlyForecastList component
+ * @property hourlyForecastList  - list of HourForecast components
+ */
 export type HourlyForecastListProps = {
-  //list of HourForecast components
   hourlyForecastList: HourForecastProps[];
 };
 
 /**
  * Props for the Error component
+ * @property title   - error title
+ * @property message - error message
  */
 export type ErrorProps = {
-  //error title
   title: string;
-
-  //error message
   message: string;
 };
 
 /**
  * WeatherContext
+ * @property isLocationFound    - indicates if the user input location coordinates have been found
+ * @property setIsLocationFound - isLocationFound setter function
+ *
+ * @property isLoading          - indicates if the weather data is loading
+ * @property setIsLoading       - isLoading setter function
+ *
+ * @property error              - indicates if something went wrong during data fetching
+ * @property setError           - error setter function
+ *
+ * @property weatherData        - fetched weather data
+ * @property fetchWeatherData   - weatherData setter function
+ *
+ * @property isMetric           - indicates if current unit is metric
+ * @property setIsMetric        - isMetric setter function
  */
 export type WeatherContextType = {
-  //indicates if the user input location coordinates have been found
   isLocationFound: boolean | null;
   setIsLocationFound: React.Dispatch<React.SetStateAction<boolean | null>>;
 
-  //indicates if the weather data is loading
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
-  //indicates if something went wrong during data fetching
   error: ErrorProps | null;
   setError: React.Dispatch<React.SetStateAction<ErrorProps | null>>;
 
-  //weather data
   weatherData: WeatherData | null;
   fetchWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
 
-  //indicates if current unit is metric
   isMetric: boolean;
   setIsMetric: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 /**
  * Weather data
+ * @property description - location description
+ * @property date        - current date
+ * @property weather     - weather data
  */
 export type WeatherData = {
   description: string;
   date: string;
-
   weather: Weather[];
-
-  //TO DO - daily forecast
-  //TO DO - hourly forecast
 };

@@ -10,99 +10,57 @@ import HourlyForecastList from "../Cards/Forecast/HourlyForecast/HourlyForecastL
 import { DayForecastProps, HourForecastProps } from "../types";
 import { useWeather } from "../hooks/useWeather";
 import Error from "../Error/Error";
+import { getLoadingDailyForecast } from "@/app/utils/utils";
 
 /**
  * Renders weather related components
  */
 export default function Weather() {
-  const forecastList: DayForecastProps[] = [
-    {
-      day: "Tue",
-      imgTemp: "images/icons/icon-rain.webp",
-      maxTemp: "28°",
-      minTemp: "14°",
-    },
-    {
-      day: "Wed",
-      imgTemp: "images/icons/icon-drizzle.webp",
-      maxTemp: "21°",
-      minTemp: "15°",
-    },
-    {
-      day: "Thu",
-      imgTemp: "images/icons/icon-sunny.webp",
-      maxTemp: "24°",
-      minTemp: "14°",
-    },
-    {
-      day: "Frid",
-      imgTemp: "images/icons/icon-partly-cloudy.webp",
-      maxTemp: "25°",
-      minTemp: "13°",
-    },
-    {
-      day: "Sat",
-      imgTemp: "images/icons/icon-storm.webp",
-      maxTemp: "21°",
-      minTemp: "15°",
-    },
-    {
-      day: "Sun",
-      imgTemp: "images/icons/icon-snow.webp",
-      maxTemp: "25°",
-      minTemp: "16°",
-    },
-    {
-      day: "Mon",
-      imgTemp: "images/icons/icon-fog.webp",
-      maxTemp: "24°",
-      minTemp: "15°",
-    },
-  ];
+  const dummyForecastList: DayForecastProps[] = getLoadingDailyForecast();
 
   const hourlyList: HourForecastProps[] = [
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "3 PM",
       temperature: "20°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "4 PM",
       temperature: "20°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "5 PM",
       temperature: "20°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "6 PM",
       temperature: "20°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "7 PM",
       temperature: "19°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "8 PM",
       temperature: "18°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "9 PM",
       temperature: "17°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "10 PM",
       temperature: "17°",
     },
     {
-      imgTemp: "images/icons/icon-sunny.webp",
+      weatherImg: "images/icons/icon-sunny.webp",
       hour: "11 PM",
       temperature: "17°",
     },
@@ -177,7 +135,17 @@ export default function Weather() {
               />
             )}
 
-            <ForecastList forecastList={forecastList} />
+            {isLoading ? (
+              <ForecastList forecastList={dummyForecastList} />
+            ) : (
+              <ForecastList
+                forecastList={
+                  weatherData
+                    ? weatherData.weather[dataIndex].dailyForecastList
+                    : dummyForecastList
+                }
+              />
+            )}
           </div>
 
           <div className={styles.hourlyCont}>

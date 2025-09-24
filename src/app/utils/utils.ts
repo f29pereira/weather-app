@@ -1,3 +1,5 @@
+import type { DayForecastProps } from "../components/types";
+
 /**
  * Location data
  * @property isValid     - is the location valid
@@ -12,6 +14,28 @@ type Location = {
   longitude: string;
   description: string;
   date: string;
+};
+
+/**
+ * Weather data
+ * @property unitType          - metric or imperial unit
+ * @property weatherImg        - weather icon image path
+ * @property temperature       - temperature value (celsius or fahrenheit)
+ * @property feels_like        - feels like temperature value (celsius or fahrenheit)
+ * @property humidity          - humidity percentage
+ * @property wind              - wind value (km/h or mph)
+ * @property precipitation     - precipitation value (mm or in)
+ * @property dailyForecastList - list of daily forecast
+ */
+export type Weather = {
+  unitType: "metric" | "imperial" | "";
+  weatherImg: string;
+  temperature: string;
+  feels_like: string;
+  humidity: string;
+  wind: string;
+  precipitation: string;
+  dailyForecastList: DayForecastProps[];
 };
 
 /**
@@ -45,26 +69,6 @@ export const fetchLocation = async (location: string): Promise<Location> => {
   }
 
   return locationData;
-};
-
-/**
- * Weather data
- * @property unitType      - metric or imperial unit
- * @property weatherImg    - weather icon image path
- * @property temperature   - temperature value (celsius or fahrenheit)
- * @property feels_like    - feels like temperature value (celsius or fahrenheit)
- * @property humidity      - humidity percentage
- * @property wind          - wind value (km/h or mph)
- * @property precipitation - precipitation value (mm or in)
- */
-export type Weather = {
-  unitType: "metric" | "imperial" | "";
-  weatherImg: string;
-  temperature: string;
-  feels_like: string;
-  humidity: string;
-  wind: string;
-  precipitation: string;
 };
 
 /**
@@ -107,6 +111,7 @@ const fetchWeatherData = async (
     humidity: "",
     wind: "",
     precipitation: "",
+    dailyForecastList: [],
   };
 
   const temperatureSearchUnit = unit === "metric" ? "celsius" : "fahrenheit";
@@ -114,10 +119,12 @@ const fetchWeatherData = async (
   const precipitationSearchUnit = unit === "metric" ? "mm" : "inch";
 
   const weatherRes = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=apparent_temperature,precipitation,relativehumidity_2m&temperature_unit=${temperatureSearchUnit}&windspeed_unit=${windSearchUnit}&precipitation_unit=${precipitationSearchUnit}`
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=apparent_temperature,precipitation,relativehumidity_2m&daily=temperature_2m_max,temperature_2m_min,weathercode&temperature_unit=${temperatureSearchUnit}&windspeed_unit=${windSearchUnit}&precipitation_unit=${precipitationSearchUnit}&timezone=auto`
   );
 
   const weatherData = await weatherRes.json(); //Open-Meteo API response
+
+  console.log(weatherData);
 
   if (weatherData) {
     weatherObj.unitType = unit;
@@ -148,9 +155,41 @@ const fetchWeatherData = async (
     const precipitationUnit = unit === "metric" ? " mm" : " in";
     weatherObj.precipitation =
       weatherData.hourly.precipitation[hourIndex] + precipitationUnit;
+
+    //daily forecast
+    weatherObj.dailyForecastList = weatherData.daily.time.map(
+      (time: string, index: number) => {
+        return {
+          day: getDayOfWeek(time),
+          weatherImg: getWeatherImagePath(weatherData.daily.weathercode[index]),
+          maxTemp: weatherData.daily.temperature_2m_max[index] + "°",
+          minTemp: weatherData.daily.temperature_2m_min[index] + "°",
+        };
+      }
+    );
   }
 
   return weatherObj;
+};
+
+/**
+ * Returns daily forecast list for loading state
+ */
+export const getLoadingDailyForecast = (): DayForecastProps[] => {
+  const dummyDaily: DayForecastProps = {
+    day: "",
+    weatherImg: "",
+    maxTemp: "",
+    minTemp: "",
+  };
+
+  const forecastList: DayForecastProps[] = [];
+
+  for (let index = 1; index <= 7; index++) {
+    forecastList.push(dummyDaily);
+  }
+
+  return forecastList;
 };
 
 /**
@@ -163,6 +202,13 @@ const getDate = (): string => {
     day: "numeric",
     year: "numeric",
   });
+};
+
+/**
+ * Retuns short day of the week
+ */
+const getDayOfWeek = (date: string): string => {
+  return new Date(date).toLocaleDateString("en-US", { weekday: "short" });
 };
 
 /**
@@ -179,27 +225,27 @@ const getWeatherImagePath = (weatherCode: number): string => {
   switch (weatherCode) {
     //clear sky
     case 0:
-      return "/images/icons/icon-sunny.webp";
+      return "images/icons/icon-sunny.webp";
 
     //partly cloudy
     case 1:
     case 2:
-      return "/images/icons/icon-partly-cloudy.webp";
+      return "images/icons/icon-partly-cloudy.webp";
 
     //overcast
     case 3:
-      return "/images/icons/icon-overcast.webp";
+      return "images/icons/icon-overcast.webp";
 
     //fog
     case 45:
     case 46:
-      return "/images/icons/icon-fog.webp";
+      return "images/icons/icon-fog.webp";
 
     //drizzle
     case 51:
     case 53:
     case 55:
-      return "/images/icons/icon-drizzle.webp";
+      return "images/icons/icon-drizzle.webp";
 
     //Rain
     case 61:
@@ -208,19 +254,19 @@ const getWeatherImagePath = (weatherCode: number): string => {
     case 80:
     case 81:
     case 82:
-      return "/images/icons/icon-rain.webp";
+      return "images/icons/icon-rain.webp";
 
     //snow fall
     case 71:
     case 73:
     case 75:
-      return "/images/icons/icon-snow.webp";
+      return "images/icons/icon-snow.webp";
 
     //thunderstorm
     case 95:
     case 96:
     case 99:
-      return "/images/icons/icon-storm.webp";
+      return "images/icons/icon-storm.webp";
 
     default:
       return "";

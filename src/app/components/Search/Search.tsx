@@ -10,14 +10,8 @@ import { FormEvent } from "react";
  * Renders search input and button
  */
 export default function Search() {
-  const {
-    isLocationFound,
-    isLoading,
-    setIsLoading,
-    setIsLocationFound,
-    setError,
-    fetchWeatherData,
-  } = useWeather();
+  const { setIsLoading, setIsLocationFound, setError, fetchWeatherData } =
+    useWeather();
 
   const search = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //prevent page reload

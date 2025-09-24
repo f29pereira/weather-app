@@ -11,7 +11,7 @@ import Image from "next/image";
  * Props are defined in {@link HourForecastProps}.
  */
 export default function HourForecast({
-  imgTemp,
+  weatherImg,
   hour,
   temperature,
 }: HourForecastProps) {
@@ -21,7 +21,7 @@ export default function HourForecast({
         {/*Weather icon*/}
         <Image
           className={styles.imgWeather}
-          src={imgTemp}
+          src={weatherImg}
           width={320}
           height={320}
           alt="Weather Icon"

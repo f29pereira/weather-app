@@ -13,7 +13,7 @@ import Image from "next/image";
  */
 export default function DayForecast({
   day,
-  imgTemp,
+  weatherImg,
   maxTemp,
   minTemp,
 }: DayForecastProps) {
@@ -23,13 +23,15 @@ export default function DayForecast({
       <h3 className={styles.title}>{day}</h3>
 
       {/*Weather icon*/}
-      <Image
-        className={styles.imgWeather}
-        src={imgTemp}
-        width={320}
-        height={320}
-        alt="Weather Icon"
-      />
+      {weatherImg === "" ? null : (
+        <Image
+          className={styles.imgWeather}
+          src={weatherImg}
+          width={48}
+          height={48}
+          alt="Weather Icon"
+        />
+      )}
 
       {/*Temperatures*/}
       <div className={styles.tempsCont}>

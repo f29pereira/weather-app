@@ -17,7 +17,7 @@ export default function ForecastList({ forecastList }: ForecastListProps) {
           <DayForecast
             key={index}
             day={forecast.day}
-            imgTemp={forecast.imgTemp}
+            weatherImg={forecast.weatherImg}
             maxTemp={forecast.maxTemp}
             minTemp={forecast.minTemp}
           />
