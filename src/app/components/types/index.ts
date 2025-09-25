@@ -1,4 +1,4 @@
-import type { Weather } from "@/app/utils/utils";
+import type { Weather, Day } from "@/app/utils/weather";
 
 /**
  * Props for the UnitOption component
@@ -65,11 +65,13 @@ export type ForecastListProps = {
 
 /**
  * Props for the HourForecast component
+ * @property day        - day of the week description
  * @property weatherImg  - weather icon image path
  * @property hour        - hour value
  * @property temperature - temperature value
  */
 export type HourForecastProps = {
+  day: string;
   weatherImg: string;
   hour: string;
   temperature: string;
@@ -109,7 +111,7 @@ export type ErrorProps = {
  * @property setError           - error setter function
  *
  * @property weatherData        - fetched weather data
- * @property fetchWeatherData   - weatherData setter function
+ * @property setWeatherData     - weatherData setter function
  *
  * @property isMetric           - indicates if current unit is metric
  * @property setIsMetric        - isMetric setter function
@@ -125,7 +127,7 @@ export type WeatherContextType = {
   setError: React.Dispatch<React.SetStateAction<ErrorProps | null>>;
 
   weatherData: WeatherData | null;
-  fetchWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
+  setWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
 
   isMetric: boolean;
   setIsMetric: React.Dispatch<React.SetStateAction<boolean>>;
@@ -136,9 +138,11 @@ export type WeatherContextType = {
  * @property description - location description
  * @property date        - current date
  * @property weather     - weather data
+ * @property days        - current day of the week and next 6 days
  */
 export type WeatherData = {
   description: string;
   date: string;
+  days: Day[];
   weather: Weather[];
 };

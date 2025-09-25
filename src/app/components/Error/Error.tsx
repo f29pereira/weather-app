@@ -27,7 +27,7 @@ export default function Error({ title, message }: ErrorProps) {
       {/*Error Icon*/}
       <Image
         className={styles.errorIcon}
-        src="/images/icons/icon-error.svg"
+        src="images/icons/icon-error.svg"
         width={18}
         height={18}
         alt=""
@@ -45,7 +45,7 @@ export default function Error({ title, message }: ErrorProps) {
           {/*Retry Icon*/}
           <Image
             className={styles.tempIcon}
-            src="/images/icons/icon-retry.svg"
+            src="images/icons/icon-retry.svg"
             width={48}
             height={48}
             alt=""

@@ -12,6 +12,7 @@ CSS Module for HourForecast component
   border: 1px solid var(--neutral-600);
   border-radius: 12px;
   width: 100%;
+  height: 3.625rem; /*58px*/
   padding: 0.5rem 1rem;
 }
 

@@ -2,7 +2,7 @@
 
 import styles from "./Search.module.css";
 import Image from "next/image";
-import { fetchLocation, setWeatherData } from "@/app/utils/utils";
+import { fetchLocation, getWeather } from "@/app/utils/weather";
 import { useWeather } from "../hooks/useWeather";
 import { FormEvent } from "react";
 
@@ -10,14 +10,14 @@ import { FormEvent } from "react";
  * Renders search input and button
  */
 export default function Search() {
-  const { setIsLoading, setIsLocationFound, setError, fetchWeatherData } =
+  const { setIsLoading, setIsLocationFound, setError, setWeatherData } =
     useWeather();
 
   const search = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //prevent page reload
 
     try {
-      fetchWeatherData(null); //reset weather data state
+      setWeatherData(null); //reset weather data state
       setIsLocationFound(null); //reset location found state
       setIsLoading(true); //loading data
 
@@ -32,15 +32,16 @@ export default function Search() {
         } else {
           setIsLocationFound(true); //location found
 
-          const weatherData = await setWeatherData(
+          const weatherData = await getWeather(
             location.latitude,
             location.longitude
           );
 
           //set weather data
-          fetchWeatherData({
+          setWeatherData({
             description: location.description,
             date: location.date,
+            days: location.days,
             weather: weatherData,
           });
 

@@ -22,7 +22,7 @@ export default function WeatherProvider({ children }: Props) {
   const [error, setError] = useState<ErrorProps | null>(null);
 
   //weather data
-  const [weatherData, fetchWeatherData] = useState<WeatherData | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   //indicates if current unit is metric
   const [isMetric, setIsMetric] = useState<boolean>(true);
@@ -37,7 +37,7 @@ export default function WeatherProvider({ children }: Props) {
         error,
         setError,
         weatherData,
-        fetchWeatherData,
+        setWeatherData,
         isMetric,
         setIsMetric,
       }}
