@@ -7,64 +7,20 @@ import TemperatureSkeleton from "../Cards/TemperatureCard/TemperatureSkeleton";
 import WeatherInfo from "../Cards/WeatherInfo/WeatherInfo";
 import ForecastList from "../Cards/Forecast/DailyForecast/ForecastList/ForecastList";
 import HourlyForecastList from "../Cards/Forecast/HourlyForecast/HourlyForecastList/HourlyForecastList";
-import { DayForecastProps, HourForecastProps } from "../types";
 import { useWeather } from "../hooks/useWeather";
 import Error from "../Error/Error";
-import { getLoadingDailyForecast } from "@/app/utils/utils";
+import {
+  getLoadingDailyForecast,
+  getLoadingHourlyForecast,
+} from "@/app/utils/weather";
 
 /**
  * Renders weather related components
  */
 export default function Weather() {
-  const dummyForecastList: DayForecastProps[] = getLoadingDailyForecast();
+  const dummyDailyList = getLoadingDailyForecast();
 
-  const hourlyList: HourForecastProps[] = [
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "3 PM",
-      temperature: "20°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "4 PM",
-      temperature: "20°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "5 PM",
-      temperature: "20°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "6 PM",
-      temperature: "20°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "7 PM",
-      temperature: "19°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "8 PM",
-      temperature: "18°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "9 PM",
-      temperature: "17°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "10 PM",
-      temperature: "17°",
-    },
-    {
-      weatherImg: "images/icons/icon-sunny.webp",
-      hour: "11 PM",
-      temperature: "17°",
-    },
-  ];
+  const dummyHourlyList = getLoadingHourlyForecast();
 
   const { isLocationFound, isLoading, error, weatherData, isMetric } =
     useWeather();
@@ -100,13 +56,13 @@ export default function Weather() {
               <TemperatureSkeleton />
             ) : (
               <Temperature
-                location={weatherData ? weatherData.description : ""}
-                date={weatherData ? weatherData.date : ""}
+                location={weatherData?.description ?? ""}
+                date={weatherData?.date ?? ""}
                 weatherIconPath={
-                  weatherData ? weatherData.weather[dataIndex].weatherImg : ""
+                  weatherData?.weather?.[dataIndex]?.weatherImg ?? ""
                 }
                 temperature={
-                  weatherData ? weatherData.weather[dataIndex].temperature : ""
+                  weatherData?.weather?.[dataIndex]?.temperature ?? ""
                 }
               />
             )}
@@ -121,35 +77,39 @@ export default function Weather() {
             ) : (
               <WeatherInfo
                 feelTemperature={
-                  weatherData ? weatherData.weather[dataIndex].feels_like : ""
+                  weatherData?.weather?.[dataIndex]?.feels_like ?? ""
                 }
-                humidity={
-                  weatherData ? weatherData.weather[dataIndex].humidity : ""
-                }
-                wind={weatherData ? weatherData.weather[dataIndex].wind : ""}
+                humidity={weatherData?.weather?.[dataIndex]?.humidity ?? ""}
+                wind={weatherData?.weather?.[dataIndex]?.wind ?? ""}
                 precipitation={
-                  weatherData
-                    ? weatherData.weather[dataIndex].precipitation
-                    : ""
+                  weatherData?.weather?.[dataIndex]?.precipitation ?? ""
                 }
               />
             )}
 
             {isLoading ? (
-              <ForecastList forecastList={dummyForecastList} />
+              <ForecastList forecastList={dummyDailyList} />
             ) : (
               <ForecastList
                 forecastList={
-                  weatherData
-                    ? weatherData.weather[dataIndex].dailyForecastList
-                    : dummyForecastList
+                  weatherData?.weather?.[dataIndex]?.dailyForecastList ??
+                  dummyDailyList
                 }
               />
             )}
           </div>
 
           <div className={styles.hourlyCont}>
-            <HourlyForecastList hourlyForecastList={hourlyList} />
+            {isLoading ? (
+              <HourlyForecastList hourlyForecastList={dummyHourlyList} />
+            ) : (
+              <HourlyForecastList
+                hourlyForecastList={
+                  weatherData?.weather?.[dataIndex]?.hourlyForecastList ??
+                  dummyHourlyList
+                }
+              />
+            )}
           </div>
         </div>
       ) : null}

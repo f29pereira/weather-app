@@ -29,19 +29,17 @@ export default function HourlyForecastList({
 
       {/*Hourly forecast*/}
       <div className={`flex-col-center ${styles.hourlyForeCastCont}`}>
-        {weatherData
-          ? hourlyForecastList
-              .filter((forecast) => forecast.day === selectedDay?.name)
-              .map((forecast, index) => (
-                <HourForecast
-                  key={index}
-                  day={forecast.day}
-                  weatherImg={forecast.weatherImg}
-                  hour={forecast.hour}
-                  temperature={forecast.temperature}
-                />
-              ))
-          : null}
+        {hourlyForecastList
+          .filter((forecast) => forecast.day === selectedDay?.name)
+          .map((forecast, index) => (
+            <HourForecast
+              key={index}
+              day={forecast.day}
+              weatherImg={forecast.weatherImg}
+              hour={forecast.hour}
+              temperature={forecast.temperature}
+            />
+          ))}
       </div>
     </section>
   );

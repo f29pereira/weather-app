@@ -3,42 +3,15 @@
 import { useState } from "react";
 import styles from "./Days.module.css";
 import Image from "next/image";
+import { useWeather } from "../../hooks/useWeather";
 
 /**
  * Renders days of the week toggle pop up
  */
 export default function Days() {
+  const { weatherData, setWeatherData } = useWeather();
+
   const [showPopUp, setShowPopUp] = useState(false);
-  const [daysList, setDaysList] = useState([
-    {
-      dayName: "Monday",
-      isSelected: true,
-    },
-    {
-      dayName: "Tuesday",
-      isSelected: false,
-    },
-    {
-      dayName: "Wednesday",
-      isSelected: false,
-    },
-    {
-      dayName: "Thursday",
-      isSelected: false,
-    },
-    {
-      dayName: "Friday",
-      isSelected: false,
-    },
-    {
-      dayName: "Saturday",
-      isSelected: false,
-    },
-    {
-      dayName: "Sunday",
-      isSelected: false,
-    },
-  ]);
 
   /**
    * Toggles week days Pop-up visibility
@@ -50,30 +23,42 @@ export default function Days() {
   /*
    * Updates the selected week day
    */
-  const updateSelectedDay = (dayName: string) => {
-    //update selected day
-    setDaysList((prevDays) =>
-      prevDays.map((day) =>
-        day.dayName === dayName
-          ? { ...day, isSelected: true }
-          : { ...day, isSelected: false }
-      )
+  const updateSelectedDay = (selectedDay: string) => {
+    if (!weatherData) {
+      return;
+    }
+
+    const updatedDays = weatherData.days.map((day) => ({
+      ...day,
+      isSelected: day.name === selectedDay,
+    }));
+
+    //update days state
+    setWeatherData((prevData) =>
+      prevData
+        ? {
+            ...prevData,
+            days: updatedDays,
+          }
+        : prevData
     );
-    //close pop up
+
+    //close pop-up
     togglePopUp();
   };
 
   return (
     <div className={styles.daysCont}>
-      {/*Current selected day*/}
       <div className={`flex-center ${styles.dayImgCont}`} onClick={togglePopUp}>
-        {daysList.map((day, index) =>
+        {/*Current selected day*/}
+        {weatherData?.days?.map((day, index) =>
           day.isSelected ? (
             <span key={index} className={styles.selectedDay}>
-              {day.dayName}
+              {day.name}
             </span>
           ) : null
-        )}
+        ) ?? null}
+        {/*Dropdown icon*/}
         <Image
           src="images/icons/icon-dropdown.svg"
           width={16}
@@ -86,17 +71,17 @@ export default function Days() {
       {showPopUp ? (
         <div className={styles.popUpCont}>
           <div className={styles.daysCont}>
-            {daysList.map((day, index) => (
+            {weatherData?.days?.map((day, index) => (
               <span
                 key={index}
                 className={styles.day}
                 onClick={() => {
-                  updateSelectedDay(day.dayName);
+                  updateSelectedDay(day.name);
                 }}
               >
-                {day.dayName}
+                {day.name}
               </span>
-            ))}
+            )) ?? null}
           </div>
         </div>
       ) : null}
