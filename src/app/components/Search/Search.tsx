@@ -44,14 +44,11 @@ export default function Search() {
             days: location.days,
             weather: weatherData,
           });
-
-          console.log(weatherData);
         }
       }
 
       setIsLoading(false); //finish loading data
     } catch (error) {
-      console.log(error);
       setError({
         title: "Something went wrong",
         message:

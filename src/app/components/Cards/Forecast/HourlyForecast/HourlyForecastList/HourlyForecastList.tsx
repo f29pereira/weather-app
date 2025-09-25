@@ -12,10 +12,17 @@ import { useWeather } from "@/app/components/hooks/useWeather";
 export default function HourlyForecastList({
   hourlyForecastList,
 }: HourlyForecastListProps) {
-  const { weatherData } = useWeather();
+  const { weatherData, isLoading } = useWeather();
 
   //current selected day
   const selectedDay = weatherData?.days.find((day) => day.isSelected);
+
+  //hourly forecast list to render (loading - dummy data / not loading - filter selected day)
+  const list = isLoading
+    ? hourlyForecastList
+    : hourlyForecastList.filter(
+        (forecast) => forecast.day === selectedDay?.name
+      );
 
   return (
     <section className={styles.forecastSec}>
@@ -29,17 +36,15 @@ export default function HourlyForecastList({
 
       {/*Hourly forecast*/}
       <div className={`flex-col-center ${styles.hourlyForeCastCont}`}>
-        {hourlyForecastList
-          .filter((forecast) => forecast.day === selectedDay?.name)
-          .map((forecast, index) => (
-            <HourForecast
-              key={index}
-              day={forecast.day}
-              weatherImg={forecast.weatherImg}
-              hour={forecast.hour}
-              temperature={forecast.temperature}
-            />
-          ))}
+        {list.map((forecast, index) => (
+          <HourForecast
+            key={index}
+            day={forecast.day}
+            weatherImg={forecast.weatherImg}
+            hour={forecast.hour}
+            temperature={forecast.temperature}
+          />
+        ))}
       </div>
     </section>
   );

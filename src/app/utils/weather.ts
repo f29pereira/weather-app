@@ -144,8 +144,6 @@ const fetchWeatherData = async (
 
   const weatherData = await weatherRes.json(); //Open-Meteo API response
 
-  console.log(weatherData);
-
   if (weatherData) {
     weatherObj.unitType = unit;
 
