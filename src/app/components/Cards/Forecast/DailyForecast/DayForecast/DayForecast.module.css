@@ -7,6 +7,8 @@ CSS Module for DayForeCast component
   background-color: var(--neutral-800);
   border: 1px solid var(--neutral-600);
   border-radius: 12px;
+  min-width: 6.5rem; /*104px*/
+  min-height: 9.6875rem; /*155px*/
   padding: 1rem 0.5rem;
 }
 
@@ -37,4 +39,11 @@ CSS Module for DayForeCast component
 .maxTemp,
 .minTemp {
   font-size: var(--font-16px);
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*day forecast container*/
+  .dayForecastCont {
+    min-width: 7.75rem; /*124px*/
+  }
 }

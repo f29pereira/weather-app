@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav/Nav";
+import WeatherProvider from "./components/Weather/WeatherProvider";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-grotesque",
@@ -26,8 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${bricolageGrotesque.variable} ${dmSans.variable}`}>
-        <Nav />
-        {children}
+        <WeatherProvider>
+          <Nav />
+          {children}
+        </WeatherProvider>
       </body>
     </html>
   );

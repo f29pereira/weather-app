@@ -1,20 +1,65 @@
 "use client"; //Client component
 
 import styles from "./Search.module.css";
-import Form from "next/form";
 import Image from "next/image";
+import { fetchLocation, getWeather } from "@/app/utils/weather";
+import { useWeather } from "../hooks/useWeather";
+import { FormEvent } from "react";
 
 /**
  * Renders search input and button
  */
 export default function Search() {
-  const search = () => {
-    //TO DO - use API https://open-meteo.com/
+  const { setIsLoading, setIsLocationFound, setError, setWeatherData } =
+    useWeather();
+
+  const search = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); //prevent page reload
+
+    try {
+      setWeatherData(null); //reset weather data state
+      setIsLocationFound(null); //reset location found state
+      setIsLoading(true); //loading data
+
+      const formData = new FormData(event.currentTarget);
+      const userInput = formData.get("searchInput");
+
+      if (userInput && typeof userInput === "string") {
+        const location = await fetchLocation(userInput);
+
+        if (!location.isValid) {
+          setIsLocationFound(false); //location not found
+        } else {
+          setIsLocationFound(true); //location found
+
+          const weatherData = await getWeather(
+            location.latitude,
+            location.longitude
+          );
+
+          //set weather data
+          setWeatherData({
+            description: location.description,
+            date: location.date,
+            days: location.days,
+            weather: weatherData,
+          });
+        }
+      }
+
+      setIsLoading(false); //finish loading data
+    } catch (error) {
+      setError({
+        title: "Something went wrong",
+        message:
+          "We couldn't connect to the server (API error). Please try again in a few moments.",
+      });
+    }
   };
 
   return (
     <section className={styles.searchSec}>
-      <Form action={search}>
+      <form onSubmit={search}>
         <div className={styles.formCont}>
           <div className={styles.searchCont}>
             {/*Search label*/}
@@ -29,6 +74,7 @@ export default function Search() {
               name="searchInput"
               id="searchInput"
               placeholder="Search for a place..."
+              required
             />
 
             {/*Search icon*/}
@@ -46,7 +92,7 @@ export default function Search() {
             Search
           </button>
         </div>
-      </Form>
+      </form>
     </section>
   );
 }

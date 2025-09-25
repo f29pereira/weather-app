@@ -4,13 +4,15 @@ import { useState } from "react";
 import styles from "./Units.module.css";
 import Image from "next/image";
 import UnitOption from "../UnitOption/UnitOption";
+import { useWeather } from "@/app/components/hooks/useWeather";
 
 /**
  * Renders Unit (Metric/Imperial) toggle pop up
  */
 export default function Units() {
+  const { isMetric, setIsMetric } = useWeather();
+
   const [showPopUp, setShowPopUp] = useState(false);
-  const [unitToggle, setUnitToggle] = useState("metric");
 
   /**
    * Toggles Units Pop-up visibility
@@ -23,7 +25,7 @@ export default function Units() {
    * Toggles Units (Metric/Imperial)
    */
   const toggleMetric = () => {
-    setUnitToggle((prev) => (prev === "metric" ? "imperial" : "metric"));
+    setIsMetric((prev) => !prev);
   };
 
   return (
@@ -50,42 +52,31 @@ export default function Units() {
         <div className={styles.selectUnitsCont}>
           <div className={styles.unitsToggle} onClick={toggleMetric}>
             <h2 className={styles.title}>
-              {unitToggle === "metric"
-                ? "Switch to Metric"
-                : "Switch to Imperial"}
+              {isMetric ? "Switch to Imperial" : "Switch to Metric"}
             </h2>
           </div>
 
           {/*Temperature*/}
           <h3 className={styles.unitTitle}>Temperature</h3>
 
-          <UnitOption
-            text="Celsius (°C)"
-            isSelected={unitToggle === "imperial"}
-          />
-          <UnitOption
-            text="Fahrenheit (°F)"
-            isSelected={unitToggle === "metric"}
-          />
+          <UnitOption text="Celsius (°C)" isSelected={isMetric} />
+          <UnitOption text="Fahrenheit (°F)" isSelected={!isMetric} />
 
           <hr className={styles.divider} />
 
           {/*Wind Speed*/}
           <h3 className={styles.unitTitle}>Wind Speed</h3>
 
-          <UnitOption text="km/h" isSelected={unitToggle === "imperial"} />
-          <UnitOption text="mph" isSelected={unitToggle === "metric"} />
+          <UnitOption text="km/h" isSelected={isMetric} />
+          <UnitOption text="mph" isSelected={!isMetric} />
 
           <hr className={styles.divider} />
 
           {/*Precipitation*/}
           <h3 className={styles.unitTitle}>Precipitation</h3>
 
-          <UnitOption
-            text="Milimeters (mm)"
-            isSelected={unitToggle === "imperial"}
-          />
-          <UnitOption text="Inches (in)" isSelected={unitToggle === "metric"} />
+          <UnitOption text="Milimeters (mm)" isSelected={isMetric} />
+          <UnitOption text="Inches (in)" isSelected={!isMetric} />
         </div>
       ) : null}
     </div>

@@ -1,134 +1,118 @@
+"use client"; //Client component
+
 import styles from "./Weather.module.css";
 import Search from "../Search/Search";
 import Temperature from "../Cards/TemperatureCard/Temperature";
+import TemperatureSkeleton from "../Cards/TemperatureCard/TemperatureSkeleton";
+import WeatherInfo from "../Cards/WeatherInfo/WeatherInfo";
 import ForecastList from "../Cards/Forecast/DailyForecast/ForecastList/ForecastList";
 import HourlyForecastList from "../Cards/Forecast/HourlyForecast/HourlyForecastList/HourlyForecastList";
-import { DayForecastProps, HourForecastProps } from "../types";
+import { useWeather } from "../hooks/useWeather";
+import Error from "../Error/Error";
+import {
+  getLoadingDailyForecast,
+  getLoadingHourlyForecast,
+} from "@/app/utils/weather";
 
 /**
  * Renders weather related components
  */
 export default function Weather() {
-  const forecastList: DayForecastProps[] = [
-    {
-      day: "Tue",
-      imgTemp: "images/icons/icon-rain.webp",
-      maxTemp: "28°",
-      minTemp: "14°",
-    },
-    {
-      day: "Wed",
-      imgTemp: "images/icons/icon-drizzle.webp",
-      maxTemp: "21°",
-      minTemp: "15°",
-    },
-    {
-      day: "Thu",
-      imgTemp: "images/icons/icon-sunny.webp",
-      maxTemp: "24°",
-      minTemp: "14°",
-    },
-    {
-      day: "Frid",
-      imgTemp: "images/icons/icon-partly-cloudy.webp",
-      maxTemp: "25°",
-      minTemp: "13°",
-    },
-    {
-      day: "Sat",
-      imgTemp: "images/icons/icon-storm.webp",
-      maxTemp: "21°",
-      minTemp: "15°",
-    },
-    {
-      day: "Sun",
-      imgTemp: "images/icons/icon-snow.webp",
-      maxTemp: "25°",
-      minTemp: "16°",
-    },
-    {
-      day: "Mon",
-      imgTemp: "images/icons/icon-fog.webp",
-      maxTemp: "24°",
-      minTemp: "15°",
-    },
-  ];
+  const dummyDailyList = getLoadingDailyForecast();
 
-  const hourlyList: HourForecastProps[] = [
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "3 PM",
-      temperature: "20°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "4 PM",
-      temperature: "20°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "5 PM",
-      temperature: "20°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "6 PM",
-      temperature: "20°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "7 PM",
-      temperature: "19°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "8 PM",
-      temperature: "18°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "9 PM",
-      temperature: "17°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "10 PM",
-      temperature: "17°",
-    },
-    {
-      imgTemp: "images/icons/icon-sunny.webp",
-      hour: "11 PM",
-      temperature: "17°",
-    },
-  ];
+  const dummyHourlyList = getLoadingHourlyForecast();
+
+  const { isLocationFound, isLoading, error, weatherData, isMetric } =
+    useWeather();
+
+  const dataIndex = isMetric ? 0 : 1; //weatherData.weather index (0 - metric / 1 - imperial)
+
+  if (error) {
+    return <Error title={error?.title} message={error?.message} />;
+  }
 
   return (
     <section>
       <header>
-        <h1 className={styles.title}>How&apos;s the sky looking today?</h1>
+        <h1 className={`text-center ${styles.title}`}>
+          How&apos;s the sky looking today?
+        </h1>
       </header>
 
       <Search />
 
-      <div className={styles.weatherDataCont}>
-        <div className={styles.tempsDailyCont}>
-          <Temperature
-            location="Berlin, Germany"
-            date="Tuesday, Aug 5, 2025"
-            temperature="28°"
-            feelTemperature="18°"
-            humidity="46%"
-            wind="14 km/h"
-            precipitation="0 mm"
-          />
-
-          <ForecastList forecastList={forecastList} />
+      {isLocationFound === false ? (
+        <div className={styles.notFoundCont}>
+          <p className={`text-center ${styles.notFoundText}`}>
+            No search result found!
+          </p>
         </div>
+      ) : null}
 
-        <div className={styles.hourlyCont}>
-          <HourlyForecastList hourlyForecastList={hourlyList} />
+      {isLocationFound === true ? (
+        <div className={styles.weatherDataCont}>
+          <div className={styles.tempsDailyCont}>
+            {isLoading ? (
+              <TemperatureSkeleton />
+            ) : (
+              <Temperature
+                location={weatherData?.description ?? ""}
+                date={weatherData?.date ?? ""}
+                weatherIconPath={
+                  weatherData?.weather?.[dataIndex]?.weatherImg ?? ""
+                }
+                temperature={
+                  weatherData?.weather?.[dataIndex]?.temperature ?? ""
+                }
+              />
+            )}
+
+            {isLoading ? (
+              <WeatherInfo
+                feelTemperature="-"
+                humidity="-"
+                wind="-"
+                precipitation="-"
+              />
+            ) : (
+              <WeatherInfo
+                feelTemperature={
+                  weatherData?.weather?.[dataIndex]?.feels_like ?? ""
+                }
+                humidity={weatherData?.weather?.[dataIndex]?.humidity ?? ""}
+                wind={weatherData?.weather?.[dataIndex]?.wind ?? ""}
+                precipitation={
+                  weatherData?.weather?.[dataIndex]?.precipitation ?? ""
+                }
+              />
+            )}
+
+            {isLoading ? (
+              <ForecastList forecastList={dummyDailyList} />
+            ) : (
+              <ForecastList
+                forecastList={
+                  weatherData?.weather?.[dataIndex]?.dailyForecastList ??
+                  dummyDailyList
+                }
+              />
+            )}
+          </div>
+
+          <div className={styles.hourlyCont}>
+            {isLoading ? (
+              <HourlyForecastList hourlyForecastList={dummyHourlyList} />
+            ) : (
+              <HourlyForecastList
+                hourlyForecastList={
+                  weatherData?.weather?.[dataIndex]?.hourlyForecastList ??
+                  dummyHourlyList
+                }
+              />
+            )}
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }

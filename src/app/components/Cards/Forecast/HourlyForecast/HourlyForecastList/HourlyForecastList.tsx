@@ -2,6 +2,7 @@ import styles from "./HourlyForecastList.module.css";
 import type { HourlyForecastListProps } from "@/app/components/types";
 import HourForecast from "../HourForecast/HourForecast";
 import Days from "@/app/components/PopUp/Days/Days";
+import { useWeather } from "@/app/components/hooks/useWeather";
 
 /**
  * Renders list of HourForecast components
@@ -11,6 +12,18 @@ import Days from "@/app/components/PopUp/Days/Days";
 export default function HourlyForecastList({
   hourlyForecastList,
 }: HourlyForecastListProps) {
+  const { weatherData, isLoading } = useWeather();
+
+  //current selected day
+  const selectedDay = weatherData?.days.find((day) => day.isSelected);
+
+  //hourly forecast list to render (loading - dummy data / not loading - filter selected day)
+  const list = isLoading
+    ? hourlyForecastList
+    : hourlyForecastList.filter(
+        (forecast) => forecast.day === selectedDay?.name
+      );
+
   return (
     <section className={styles.forecastSec}>
       <div className={styles.titlePopupCont}>
@@ -23,10 +36,11 @@ export default function HourlyForecastList({
 
       {/*Hourly forecast*/}
       <div className={`flex-col-center ${styles.hourlyForeCastCont}`}>
-        {hourlyForecastList.map((forecast, index) => (
+        {list.map((forecast, index) => (
           <HourForecast
             key={index}
-            imgTemp={forecast.imgTemp}
+            day={forecast.day}
+            weatherImg={forecast.weatherImg}
             hour={forecast.hour}
             temperature={forecast.temperature}
           />

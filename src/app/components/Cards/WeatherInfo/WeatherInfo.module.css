@@ -1,0 +1,47 @@
+/*
+CSS Module for Info component
+*/
+
+/*information grid*/
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+/*information card*/
+.infoCard {
+  background-color: var(--neutral-800);
+  border-radius: 12px;
+  border: 1px solid var(--neutral-600);
+  padding: 1rem;
+}
+
+/*information card title*/
+.infoTitle {
+  color: var(--neutral-200);
+  font-size: 1.125rem; /*18px*/
+  margin-bottom: 1rem;
+}
+
+/*information card value*/
+.infoValue {
+  font-size: 2rem; /*32px*/
+}
+
+@media (min-width: 48rem /*768px*/) {
+  /*information grid*/
+  .infoGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 87.5rem /*1400px*/) {
+  /*information grid*/
+  .infoGrid {
+    gap: 1.5rem;
+  }
+}
