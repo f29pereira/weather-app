@@ -1,6 +1,6 @@
 import { fetchLocation } from "@/app/utils/weather";
 import { getSixDaysOfWeek } from "@/app/utils/weather";
-import { getDate } from "@/app/utils/utils";
+import { getDate, getDayOfWeek } from "@/app/utils/utils";
 
 /**
  * Test for function: fetchLocation
@@ -32,7 +32,7 @@ describe("fetchLocation function", () => {
 
     const fetchedData = await fetchLocation("Lorem ipsum");
 
-    expect(fetchedData).toEqual(invalidLocation);
+    expect(fetchedData.isValid).toBe(false);
   });
 
   it("returns object with isValid=true and location data when API returns result", async () => {
@@ -67,6 +67,19 @@ describe("fetchLocation function", () => {
 
     const fetchedData = await fetchLocation(validName);
 
-    expect(fetchedData).toEqual(validLocation);
+    expect(fetchedData.isValid).toBe(validLocation.isValid);
+    expect(fetchedData.latitude).toBe(validLocation.latitude);
+    expect(fetchedData.longitude).toBe(validLocation.longitude);
+    expect(fetchedData.description).toBe(validLocation.description);
+    expect(fetchedData.date).toBe(validLocation.date);
+    expect(fetchedData.days).toEqual(validLocation.days);
+  });
+
+  it("throws an error when fetching fails", async () => {
+    const error = "API error";
+
+    global.fetch = jest.fn().mockRejectedValue(new Error(error)); //fail API response
+
+    await expect(fetchLocation("Setúbal")).rejects.toThrow(error);
   });
 });
