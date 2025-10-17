@@ -60,7 +60,7 @@ export default function Days() {
         ) ?? null}
         {/*Dropdown icon*/}
         <Image
-          src="images/icons/icon-dropdown.svg"
+          src="/images/icons/icon-dropdown.svg"
           width={16}
           height={16}
           alt=""
