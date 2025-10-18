@@ -1,5 +1,5 @@
 import { fetchWeatherData } from "@/app/utils/weather";
-import { getDateAndHour, getDate, getHour } from "@/app/utils/utils";
+import { getDateAndHour, getHour, getDayOfWeek } from "@/app/utils/utils";
 
 /**
  * Test for function: fetchWeatherData
@@ -17,6 +17,8 @@ describe("fetchWeatherData function", () => {
   const validLongitude = "-8.8882";
   const dateAndHour = getDateAndHour();
   const hour = getHour(dateAndHour);
+  const dayShort = getDayOfWeek(dateAndHour, "short");
+  const dayLong = getDayOfWeek(dateAndHour, "long");
 
   // Expected metric weather data
   const metricData = {
@@ -29,7 +31,7 @@ describe("fetchWeatherData function", () => {
     precipitation: "0 mm",
     dailyForecastList: [
       {
-        day: "Fri",
+        day: dayShort,
         weatherImg: "/images/icons/icon-sunny.webp",
         maxTemp: "26°",
         minTemp: "15°",
@@ -37,7 +39,7 @@ describe("fetchWeatherData function", () => {
     ],
     hourlyForecastList: [
       {
-        day: "Friday",
+        day: dayLong,
         weatherImg: "/images/icons/icon-sunny.webp",
         hour: hour,
         temperature: "26°",
@@ -61,7 +63,7 @@ describe("fetchWeatherData function", () => {
       weathercode: 0,
     },
     daily: {
-      time: ["2025-10-17"],
+      time: [dateAndHour],
       weathercode: [0],
       temperature_2m_max: [26],
       temperature_2m_min: [15],
@@ -79,7 +81,7 @@ describe("fetchWeatherData function", () => {
     precipitation: "0 in",
     dailyForecastList: [
       {
-        day: "Fri",
+        day: dayShort,
         weatherImg: "/images/icons/icon-sunny.webp",
         maxTemp: "78.8°",
         minTemp: "59°",
@@ -87,7 +89,7 @@ describe("fetchWeatherData function", () => {
     ],
     hourlyForecastList: [
       {
-        day: "Friday",
+        day: dayLong,
         weatherImg: "/images/icons/icon-sunny.webp",
         hour: hour,
         temperature: "78.8°",
@@ -111,7 +113,7 @@ describe("fetchWeatherData function", () => {
       weathercode: 0,
     },
     daily: {
-      time: ["2025-10-17"],
+      time: [dateAndHour],
       weathercode: [0],
       temperature_2m_max: [78.8],
       temperature_2m_min: [59],
