@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import WeatherProvider from "@/app/components/Weather/WeatherProvider";
 import Search from "@/app/components/Search/Search";

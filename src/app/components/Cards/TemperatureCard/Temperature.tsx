@@ -28,6 +28,7 @@ export default function Temperature({
           {/*Icon*/}
           {weatherIconPath === "" ? null : (
             <Image
+              data-testid="weather-icon"
               className={styles.tempIcon}
               src={weatherIconPath}
               width={48}

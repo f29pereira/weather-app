@@ -9,6 +9,7 @@ export default function TemperatureSkeleton() {
     <div className={`flex-col-center ${styles.tempCardBgLoading}`}>
       <div className={`flex-center ${styles.loadingIconCont}`}>
         <Image
+          data-testid="loading-icon"
           className={styles.loadingIcon}
           src="/images/icons/icon-loading.svg"
           width={48}
