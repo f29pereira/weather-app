@@ -4,7 +4,7 @@ import {
   metricMockData,
   imperialData,
   imperialMockData,
-} from "../fixtures/weather.fixture";
+} from "../../fixtures/weather.fixture";
 
 /**
  * Test for function: fetchWeatherData

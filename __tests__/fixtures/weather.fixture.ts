@@ -1,4 +1,5 @@
 import { getDateAndHour, getHour, getDayOfWeek } from "@/app/utils/utils";
+import type { Weather } from "@/app/utils/weather";
 
 const dateAndHour = getDateAndHour();
 const hour = getHour(dateAndHour);
@@ -6,7 +7,7 @@ const dayShort = getDayOfWeek(dateAndHour, "short");
 const dayLong = getDayOfWeek(dateAndHour, "long");
 
 // Expected metric weather data
-export const metricData = {
+export const metricData: Weather = {
   unitType: "metric",
   weatherImg: "/images/icons/icon-sunny.webp",
   temperature: "27.3°",
@@ -57,7 +58,7 @@ export const metricMockData = {
 };
 
 // Expected imperial weather data
-export const imperialData = {
+export const imperialData: Weather = {
   unitType: "imperial",
   weatherImg: "/images/icons/icon-sunny.webp",
   temperature: "81.14°",
