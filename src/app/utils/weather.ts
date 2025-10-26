@@ -324,3 +324,13 @@ export const getWeatherImagePath = (weatherCode: number): string => {
       return "";
   }
 };
+
+/**
+ * Returns the weather image name from the given path
+ */
+export const getImageName = (path: string): string => {
+  const regex = /icon-[\w]+/i;
+  const match = path.match(regex);
+
+  return match ? match[0] : "";
+};

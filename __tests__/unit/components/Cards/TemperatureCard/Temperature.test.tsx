@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Temperature from "@/app/components/Cards/TemperatureCard/Temperature";
+import { getImageName } from "@/app/utils/weather";
 
 /**
  * Tests for the Temperature component
@@ -8,7 +9,7 @@ describe("Temperature component", () => {
   const locationProp = "Setúbal, Portugal";
   const dateProp = "Saturday, Oct 18, 2025";
   const weatherIconPathProp = "/images/icons/icon-sunny.webp";
-  const weatherIconName = "icon-sunny";
+  const weatherIconName = getImageName(weatherIconPathProp);
   const temperatureProp = "27.3°";
 
   let location: HTMLElement;
