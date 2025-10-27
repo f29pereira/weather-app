@@ -18,13 +18,17 @@ export default function DayForecast({
   minTemp,
 }: DayForecastProps) {
   return (
-    <div className={`flex-col-center ${styles.dayForecastCont}`}>
+    <div
+      className={`flex-col-center ${styles.dayForecastCont}`}
+      data-testid={`${day}-forecast`}
+    >
       {/*Day of the week*/}
-      <h3 className={styles.title}>{day}</h3>
+      <h2 className={styles.title}>{day}</h2>
 
       {/*Weather icon*/}
       {weatherImg === "" ? null : (
         <Image
+          data-testid="forecast-weather-icon"
           className={styles.imgWeather}
           src={weatherImg}
           width={48}
