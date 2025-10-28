@@ -1,17 +1,30 @@
 import type { Weather } from "@/app/utils/weather";
+import {
+  getDateAndHour,
+  getNextDateAndHour,
+  getHour,
+  getDayOfWeek,
+} from "@/app/utils/utils";
+
+const currentDate = getDateAndHour();
+const currentHour = getHour(currentDate);
+const currentDayShort = getDayOfWeek(currentDate, "short");
+const currentDayLong = getDayOfWeek(currentDate, "long");
+const nextDate = getNextDateAndHour(currentDate);
+const nextDayShort = getDayOfWeek(nextDate, "short");
 
 /**
  * Mocked data: daily forecast list in metric units
  */
 export const foreCastListMetric = [
   {
-    day: "Mon",
+    day: currentDayShort,
     weatherImg: "/images/icons/icon-sunny.webp",
     maxTemp: "20°",
     minTemp: "15°",
   },
   {
-    day: "Tue",
+    day: nextDayShort,
     weatherImg: "/images/icons/icon-partly-cloudy.webp",
     maxTemp: "20°",
     minTemp: "14°",
@@ -23,13 +36,13 @@ export const foreCastListMetric = [
  */
 export const foreCastListImperial = [
   {
-    day: "Mon",
+    day: currentDayShort,
     weatherImg: "/images/icons/icon-sunny.webp",
     maxTemp: "68°",
     minTemp: "59°",
   },
   {
-    day: "Tue",
+    day: nextDayShort,
     weatherImg: "/images/icons/icon-partly-cloudy.webp",
     maxTemp: "68°",
     minTemp: "57.2°",
@@ -42,16 +55,16 @@ export const foreCastListImperial = [
 export const hourlyForecastListMetric = [
   {
     id: "0",
-    day: "Monday",
+    day: currentDayLong,
     weatherImg: "/images/icons/icon-sunny.webp",
-    hour: "1 PM",
+    hour: currentHour,
     temperature: "26°",
   },
   {
     id: "1",
-    day: "Monday",
+    day: currentDayLong,
     weatherImg: "/images/icons/icon-partly-cloudy.webp",
-    hour: "2 PM",
+    hour: currentHour,
     temperature: "18°",
   },
 ];
@@ -62,51 +75,17 @@ export const hourlyForecastListMetric = [
 export const hourlyForecastListImperial = [
   {
     id: "0",
-    day: "Monday",
+    day: currentDayLong,
     weatherImg: "/images/icons/icon-sunny.webp",
-    hour: "1 PM",
+    hour: currentHour,
     temperature: "78.8°",
   },
   {
     id: "1",
-    day: "Monday",
+    day: currentDayLong,
     weatherImg: "/images/icons/icon-partly-cloudy.webp",
-    hour: "2 PM",
+    hour: currentHour,
     temperature: "64.4°",
-  },
-];
-
-/**
- * Mocked data: list of days with Monday selected
- */
-export const daysList = [
-  {
-    name: "Monday",
-    isSelected: true,
-  },
-  {
-    name: "Tuesday",
-    isSelected: false,
-  },
-  {
-    name: "Wednesday",
-    isSelected: false,
-  },
-  {
-    name: "Thursday",
-    isSelected: false,
-  },
-  {
-    name: "Friday",
-    isSelected: false,
-  },
-  {
-    name: "Saturday",
-    isSelected: false,
-  },
-  {
-    name: "Sunday",
-    isSelected: false,
   },
 ];
 
@@ -128,13 +107,13 @@ export const metricData: Weather = {
 /**
  * Mocked data: API response in metric units
  */
-export const metricMockData = {
+export const metricAPIResponse = {
   unitType: "metric",
   hourly: {
-    time: ["2025-10-27T13:00", "2025-10-27T14:00"],
-    apparent_temperature: [20],
-    relativehumidity_2m: [50],
-    precipitation: [0],
+    time: [currentDate, currentDate],
+    apparent_temperature: [20, 20],
+    relativehumidity_2m: [50, 50],
+    precipitation: [0, 0],
     temperature_2m: [26, 18],
     weathercode: [0, 1],
   },
@@ -144,7 +123,7 @@ export const metricMockData = {
     weathercode: 0,
   },
   daily: {
-    time: ["2025-10-27", "2025-10-28"],
+    time: [currentDate, nextDate],
     weathercode: [0, 1],
     temperature_2m_max: [20, 20],
     temperature_2m_min: [15, 14],
@@ -169,13 +148,13 @@ export const imperialData: Weather = {
 /**
  * Mocked data: API response in imperial units
  */
-export const imperialMockData = {
+export const imperialAPIResponse = {
   unitType: "imperial",
   hourly: {
-    time: ["2025-10-27T13:00", "2025-10-27T14:00"],
-    apparent_temperature: [68],
-    relativehumidity_2m: [50],
-    precipitation: [0],
+    time: [currentDate, currentDate],
+    apparent_temperature: [68, 68],
+    relativehumidity_2m: [50, 50],
+    precipitation: [0, 0],
     temperature_2m: [78.8, 64.4],
     weathercode: [0, 1],
   },
@@ -185,7 +164,7 @@ export const imperialMockData = {
     weathercode: 0,
   },
   daily: {
-    time: ["2025-10-27", "2025-10-28"],
+    time: [currentDate, nextDate],
     weathercode: [0, 1],
     temperature_2m_max: [68, 68],
     temperature_2m_min: [59, 57.2],

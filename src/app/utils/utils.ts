@@ -36,3 +36,13 @@ export const getHour = (date: string): string => {
 export const getDateAndHour = (): string => {
   return new Date().toISOString().slice(0, 13) + ":00";
 };
+
+/**
+ * Returns the next date with format: "YYYY-MM-DDTHH:00"
+ */
+export const getNextDateAndHour = (currentDate: string): string => {
+  const date = new Date(currentDate);
+  date.setDate(date.getDate() + 1);
+
+  return date.toISOString().slice(0, 13) + ":00";
+};
