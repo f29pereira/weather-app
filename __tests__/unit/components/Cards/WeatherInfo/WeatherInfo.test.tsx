@@ -1,41 +1,52 @@
 import { render, screen } from "@testing-library/react";
 import WeatherInfo from "@/app/components/Cards/WeatherInfo/WeatherInfo";
+import { checkWeatherInfo } from "../../../../helpers/weatherHelpers";
+import { getDate } from "@/app/utils/utils";
+import { getSixDaysOfWeek } from "@/app/utils/weather";
+import { metricData, imperialData } from "../../../../fixtures/weather.fixture";
+import type { WeatherData } from "@/app/components/types";
 
 /**
  * Tests for the WeatherInfo component
  */
-describe("Temperature component", () => {
-  const feelTemperatureProp = "20°";
-  const humidityProp = "50%";
-  const windProp = "2.3 km/h";
-  const precipitationProp = "0 mm";
+describe("WeatherInfo component", () => {
+  const weatherData: WeatherData = {
+    description: "Setúbal, Portugal",
+    date: getDate(),
+    days: getSixDaysOfWeek(),
+    weather: [{ ...metricData }, { ...imperialData }],
+  };
 
-  let feelTemperature: HTMLElement;
-  let humidity: HTMLElement;
-  let wind: HTMLElement;
-  let precipitation: HTMLElement;
+  /**
+   * Helper function: renders WeatherInfo component with metric or imperial data
+   */
+  const renderWeatherInfo = (weatherData: WeatherData, isMetric: boolean) => {
+    const { weather } = weatherData;
+    const currentWeatherUnit = isMetric ? weather[0] : weather[1]; // metric or imperial data
+    const feelTemperature = currentWeatherUnit.feels_like;
+    const humidity = currentWeatherUnit.humidity;
+    const wind = currentWeatherUnit.wind;
+    const precipitation = currentWeatherUnit.precipitation;
 
-  beforeEach(() => {
     render(
       <WeatherInfo
-        feelTemperature={feelTemperatureProp}
-        humidity={humidityProp}
-        wind={windProp}
-        precipitation={precipitationProp}
+        feelTemperature={feelTemperature}
+        humidity={humidity}
+        wind={wind}
+        precipitation={precipitation}
       />
     );
+  };
 
-    feelTemperature = screen.getByText(new RegExp(feelTemperatureProp, "i"));
-    humidity = screen.getByText(new RegExp(humidityProp, "i"));
-    wind = screen.getByText(new RegExp(windProp, "i"));
-    precipitation = screen.getByText(new RegExp(precipitationProp, "i"));
+  it("renders the values for feels like temperature, humidity, wind and precipitation in metric units", () => {
+    const isMetric = true;
+    renderWeatherInfo(weatherData, isMetric);
+    checkWeatherInfo(weatherData, isMetric);
   });
 
-  it("renders all elements with prop values", () => {
-    // Check elements existence with prop values
-    expect(feelTemperature).toBeInTheDocument();
-    expect(humidity).toBeInTheDocument();
-    expect(wind).toBeInTheDocument();
-    expect(precipitation).toBeInTheDocument();
+  it("renders the values for feels like temperature, humidity, wind and precipitation in imperial units", () => {
+    const isMetric = false;
+    renderWeatherInfo(weatherData, isMetric);
+    checkWeatherInfo(weatherData, isMetric);
   });
 });

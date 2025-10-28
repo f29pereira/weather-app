@@ -1,52 +1,50 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import Temperature from "@/app/components/Cards/TemperatureCard/Temperature";
-import { getImageName } from "@/app/utils/weather";
+import { getDate } from "@/app/utils/utils";
+import { metricData, imperialData } from "../../../../fixtures/weather.fixture";
+import { checkTemperature } from "../../../../helpers/weatherHelpers";
+import { getSixDaysOfWeek } from "@/app/utils/weather";
+import type { WeatherData } from "@/app/components/types";
 
 /**
  * Tests for the Temperature component
  */
 describe("Temperature component", () => {
-  const locationProp = "Setúbal, Portugal";
-  const dateProp = "Saturday, Oct 18, 2025";
-  const weatherIconPathProp = "/images/icons/icon-sunny.webp";
-  const weatherIconName = getImageName(weatherIconPathProp);
-  const temperatureProp = "27.3°";
+  const weatherData: WeatherData = {
+    description: "Setúbal, Portugal",
+    date: getDate(),
+    days: getSixDaysOfWeek(),
+    weather: [{ ...metricData }, { ...imperialData }],
+  };
 
-  let location: HTMLElement;
-  let date: HTMLElement;
-  let image: HTMLElement;
-  let temperature: HTMLElement;
+  /**
+   * Helper function: renders Temperature component with metric or imperial data
+   */
+  const renderTemperature = (weatherData: WeatherData, isMetric: boolean) => {
+    const { weather } = weatherData;
+    const currentWeatherUnit = isMetric ? weather[0] : weather[1]; // metric or imperial data
+    const temperatureValue = currentWeatherUnit.temperature;
+    const weatherImagePath = currentWeatherUnit.weatherImg;
 
-  beforeEach(() => {
     render(
       <Temperature
-        location={locationProp}
-        date={dateProp}
-        weatherIconPath={weatherIconPathProp}
-        temperature={temperatureProp}
+        location={weatherData.description}
+        date={weatherData.date}
+        weatherIconPath={weatherImagePath}
+        temperature={temperatureValue}
       />
     );
+  };
 
-    location = screen.getByRole("heading", {
-      level: 2,
-      name: new RegExp(locationProp, "i"),
-    });
-
-    date = screen.getByText(new RegExp(dateProp, "i"));
-    image = screen.getByTestId("weather-icon");
-    temperature = screen.getByText(new RegExp(temperatureProp, "i"));
+  it("renders the weather location, date, image and temperature value in metric units", () => {
+    const isMetric = true;
+    renderTemperature(weatherData, isMetric);
+    checkTemperature(weatherData, isMetric);
   });
 
-  it("renders all elements with prop values", () => {
-    // Check elements existence with prop values
-    expect(location).toBeInTheDocument();
-    expect(date).toBeInTheDocument();
-    expect(image).toHaveAttribute(
-      "src",
-      expect.stringMatching(
-        new RegExp(`_next/image\\?url=.*${weatherIconName}\\.webp`)
-      )
-    ); // Match Next.js Image component src
-    expect(temperature).toBeInTheDocument();
+  it("renders the weather location, date, image and temperature value in imperial units", () => {
+    const isMetric = false;
+    renderTemperature(weatherData, isMetric);
+    checkTemperature(weatherData, isMetric);
   });
 });

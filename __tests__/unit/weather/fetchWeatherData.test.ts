@@ -1,9 +1,9 @@
 import { fetchWeatherData } from "@/app/utils/weather";
 import {
   metricData,
-  metricMockData,
+  metricAPIResponse,
   imperialData,
-  imperialMockData,
+  imperialAPIResponse,
 } from "../../fixtures/weather.fixture";
 
 /**
@@ -56,11 +56,11 @@ describe("fetchWeatherData function", () => {
   };
 
   it("returns object with weather data in metric units", async () => {
-    await testFetchWeatherData("metric", metricMockData, metricData);
+    await testFetchWeatherData("metric", metricAPIResponse, metricData);
   });
 
   it("returns object with weather data in imperial units", async () => {
-    await testFetchWeatherData("imperial", imperialMockData, imperialData);
+    await testFetchWeatherData("imperial", imperialAPIResponse, imperialData);
   });
 
   it("throws an error when fetching fails", async () => {
