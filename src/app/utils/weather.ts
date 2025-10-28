@@ -189,6 +189,7 @@ export const fetchWeatherData = async (
     weatherObj.hourlyForecastList = weatherData.hourly.time.map(
       (time: string, index: number) => {
         return {
+          id: index.toString(),
           day: getDayOfWeek(time, "long"),
           weatherImg: getWeatherImagePath(
             weatherData.hourly.weathercode[index]
@@ -255,6 +256,7 @@ export const getLoadingDailyForecast = (): DayForecastProps[] => {
  */
 export const getLoadingHourlyForecast = (): HourForecastProps[] => {
   const dummyHourly: HourForecastProps = {
+    id: "",
     day: "",
     weatherImg: "",
     hour: "",

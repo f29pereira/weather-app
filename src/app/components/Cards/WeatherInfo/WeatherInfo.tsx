@@ -14,7 +14,7 @@ export default function WeatherInfo({
   precipitation,
 }: WeatherInfoProps) {
   return (
-    <div className={styles.infoGrid}>
+    <div className={styles.infoGrid} data-testid="weatherInfo">
       {/*Feels Like*/}
       <div className={styles.infoCard}>
         <h3 className={styles.infoTitle}>Feels Like</h3>

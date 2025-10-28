@@ -39,6 +39,7 @@ export default function HourlyForecastList({
         {list.map((forecast, index) => (
           <HourForecast
             key={index}
+            id={forecast.id}
             day={forecast.day}
             weatherImg={forecast.weatherImg}
             hour={forecast.hour}

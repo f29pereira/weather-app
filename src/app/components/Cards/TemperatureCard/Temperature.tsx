@@ -15,7 +15,7 @@ export default function Temperature({
   temperature,
 }: TemperatureProps) {
   return (
-    <div className={styles.tempCardBg}>
+    <div className={styles.tempCardBg} data-testid="temperature">
       <div className={styles.tempCardCont}>
         <div className={styles.tempCardTitleCont}>
           {/*Location*/}
