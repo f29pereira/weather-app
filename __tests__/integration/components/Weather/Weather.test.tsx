@@ -5,6 +5,13 @@ import { WeatherContextType } from "@/app/components/types";
 import { getDate } from "@/app/utils/utils";
 import { getSixDaysOfWeek } from "@/app/utils/weather";
 import { metricData, imperialData } from "../../../fixtures/weather.fixture";
+import type { WeatherData } from "@/app/components/types";
+import {
+  checkTemperature,
+  checkWeatherInfo,
+  checkForecastList,
+  checkHourlyForecastList,
+} from "../../../helpers/weatherHelpers";
 
 let useWeatherMock: WeatherContextType;
 
@@ -38,6 +45,40 @@ afterEach(() => {
  * Integration testing: Weather component
  */
 describe("Weather component", () => {
+  const day = getSixDaysOfWeek().find((day) => day.isSelected);
+
+  /**
+   * Helper function: mocks useWeather with valid API data and the current unit type
+   */
+  const setWeatherData = (unitType: "metric" | "imperial") => {
+    useWeatherMock = {
+      ...useWeatherMock,
+      isLocationFound: true,
+      weatherData: {
+        description: "Setúbal, Portugal",
+        date: getDate(),
+        days: getSixDaysOfWeek(),
+        weather: [{ ...metricData }, { ...imperialData }],
+      },
+      isMetric: unitType === "imperial",
+    };
+  };
+
+  /**
+   * Helper function: returns the foreCastList and hourlyForecastList for the current unit type
+   */
+  const getLists = (weatherData: WeatherData) => {
+    const { weather } = weatherData;
+    const currentWeatherUnit = useWeatherMock.isMetric
+      ? weather[0]
+      : weather[1]; // metric or imperial data
+
+    const dailyForecastList = currentWeatherUnit.dailyForecastList;
+    const hourlyForecastList = currentWeatherUnit.hourlyForecastList;
+
+    return { dailyForecastList, hourlyForecastList };
+  };
+
   it("renders message when the location is not found", async () => {
     useWeatherMock = { ...useWeatherMock, isLocationFound: false };
 
@@ -93,60 +134,34 @@ describe("Weather component", () => {
     // Check elements existence
     expect(title).toBeInTheDocument();
     expect(message).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
   });
 
-  it("renders all weather related components (Temperature, WeatherInfo, ForecastList and HourlyForecastList) with valid API data", () => {
-    useWeatherMock = {
-      ...useWeatherMock,
-      isLocationFound: true,
-      weatherData: {
-        description: "Setúbal, Portugal",
-        date: getDate(),
-        days: getSixDaysOfWeek(),
-        weather: [{ ...metricData }, { ...imperialData }],
-      },
-    };
+  it("renders all weather related components (Temperature, WeatherInfo, ForecastList and HourlyForecastList) with valid API data in metric units", () => {
+    setWeatherData("metric");
+
+    const data = useWeatherMock.weatherData!;
+    const { dailyForecastList, hourlyForecastList } = getLists(data);
 
     render(<Weather />);
 
-    // Temperature component
-    const location = screen.getByRole("heading", {
-      level: 2,
-      name: useWeatherMock.weatherData?.description,
-    });
+    checkTemperature(data, useWeatherMock.isMetric);
+    checkWeatherInfo(data, useWeatherMock.isMetric);
+    checkForecastList(dailyForecastList);
+    checkHourlyForecastList(hourlyForecastList, day);
+  });
 
-    const weatherInfo = useWeatherMock.weatherData!.weather[0];
+  it("renders all weather related components (Temperature, WeatherInfo, ForecastList and HourlyForecastList) with valid API data in imperial units", () => {
+    setWeatherData("imperial");
 
-    // WeatherInfo component
-    const feelTemperatureValue = weatherInfo.feels_like;
-    const feelTemperature = screen.getByText(feelTemperatureValue);
+    const data = useWeatherMock.weatherData!;
+    const { dailyForecastList, hourlyForecastList } = getLists(data);
 
-    // ForecastList component
-    const dayValue = weatherInfo.dailyForecastList[0].day;
-    const day = screen.getByRole("heading", {
-      level: 3,
-      name: new RegExp(dayValue, "i"),
-    });
+    render(<Weather />);
 
-    //HourlyForecastList component
-    const title = screen.getByRole("heading", {
-      level: 3,
-      name: /Hourly forecast/i,
-    });
-    const hourValue = weatherInfo.hourlyForecastList[0].hour;
-    const hour = screen.getByText(new RegExp(hourValue, "i"));
-
-    // Check Temperature component existence
-    expect(location).toBeInTheDocument();
-
-    // Check WeatherInfo component existence
-    expect(feelTemperature).toBeInTheDocument();
-
-    // Check ForecastList component  existence
-    expect(day).toBeInTheDocument();
-
-    // Check HourlyForecastList component existence
-    expect(title).toBeInTheDocument();
-    expect(hour).toBeInTheDocument();
+    checkTemperature(data, useWeatherMock.isMetric);
+    checkWeatherInfo(data, useWeatherMock.isMetric);
+    checkForecastList(dailyForecastList);
+    checkHourlyForecastList(hourlyForecastList, day);
   });
 });
