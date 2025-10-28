@@ -15,7 +15,11 @@ const config: Config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
-  testPathIgnorePatterns: ["<rootDir>/__tests__/fixtures/.*"], //ignore files inside fixtures folder
+  //ignore fixtures and helpers folders files
+  testPathIgnorePatterns: [
+    "<rootDir>/__tests__/fixtures/.*",
+    "<rootDir>/__tests__/helpers/.*",
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
