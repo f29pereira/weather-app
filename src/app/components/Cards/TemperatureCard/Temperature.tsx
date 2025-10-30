@@ -1,6 +1,7 @@
 import styles from "./Temperature.module.css";
 import type { TemperatureProps } from "../../types";
 import Image from "next/image";
+import { getWeatherDescription } from "@/app/utils/weather";
 
 /**
  * Renders temperature card with:
@@ -14,12 +15,14 @@ export default function Temperature({
   weatherIconPath,
   temperature,
 }: TemperatureProps) {
+  const currentWeather = getWeatherDescription(weatherIconPath);
+
   return (
-    <div className={styles.tempCardBg} data-testid="temperature">
+    <div className={styles.tempCardBg} role="region" aria-label="Weather">
       <div className={styles.tempCardCont}>
         <div className={styles.tempCardTitleCont}>
           {/*Location*/}
-          <h2 className={`text-center ${styles.location}`}>{location}</h2>
+          <span className={`text-center ${styles.location}`}>{location}</span>
           {/*Current date*/}
           <p className={`text-center ${styles.date}`}>{date}</p>
         </div>
@@ -33,7 +36,7 @@ export default function Temperature({
               src={weatherIconPath}
               width={48}
               height={48}
-              alt=""
+              alt={`Current weather is ${currentWeather}`}
             />
           )}
           {/*Temperature*/}

@@ -24,6 +24,8 @@ CSS Module for Info component
   color: var(--neutral-200);
   font-size: 1.125rem; /*18px*/
   margin-bottom: 1rem;
+  display: block;
+  font-weight: bold;
 }
 
 /*information card value*/

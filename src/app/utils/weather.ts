@@ -336,3 +336,13 @@ export const getImageName = (path: string): string => {
 
   return match ? match[0] : "";
 };
+
+/**
+ * Returns the weather description from the given image path
+ */
+export const getWeatherDescription = (path: string): string => {
+  const regex = /icon-(.*)\.[^.]+$/;
+  const match = path.match(regex);
+
+  return match ? match[1].replace(/-/g, " ") : "";
+};
