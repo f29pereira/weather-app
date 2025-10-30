@@ -25,12 +25,17 @@ export default function HourlyForecastList({
       );
 
   return (
-    <section className={styles.forecastSec}>
+    <section
+      className={styles.forecastSec}
+      role="region"
+      aria-labelledby="hourlyForecastId"
+    >
       <div className={styles.titlePopupCont}>
         {/*Title*/}
-        <h3 className={styles.title}>Hourly forecast</h3>
+        <h3 id="hourlyForecastId" className={styles.title}>
+          Hourly forecast
+        </h3>
 
-        {/*Day pop up*/}
         <Days />
       </div>
 

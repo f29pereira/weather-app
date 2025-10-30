@@ -1,6 +1,7 @@
 import styles from "./HourForecast.module.css";
 import type { HourForecastProps } from "@/app/components/types";
 import Image from "next/image";
+import { getWeatherDescription } from "@/app/utils/weather";
 
 /**
  * Renders a hour forecast with:
@@ -16,6 +17,8 @@ export default function HourForecast({
   hour,
   temperature,
 }: HourForecastProps) {
+  const weather = getWeatherDescription(weatherImg);
+
   return (
     <div className={styles.hourForecastCont} data-testid={`${id}-forecast`}>
       <div className="flex-center">
@@ -27,7 +30,7 @@ export default function HourForecast({
             src={weatherImg}
             width={320}
             height={320}
-            alt="Weather Icon"
+            alt={`Current weather is ${weather}`}
           />
         )}
 
@@ -36,7 +39,10 @@ export default function HourForecast({
       </div>
 
       {/*Current temperature*/}
-      <span className={styles.temperature}>{temperature}</span>
+      <div>
+        <span className="sr-only">Temperature</span>
+        <span className={styles.temperature}>{temperature}</span>
+      </div>
     </div>
   );
 }
