@@ -14,9 +14,9 @@ export default function ForecastList({ forecastList }: ForecastListProps) {
       role="region"
       aria-labelledby="dailyForecastId"
     >
-      <h3 id="dailyForecastId" className={styles.title}>
+      <h2 id="dailyForecastId" className={styles.title}>
         Daily forecast
-      </h3>
+      </h2>
 
       <div className={styles.forecastGrid}>
         {forecastList.map((forecast, index) => (

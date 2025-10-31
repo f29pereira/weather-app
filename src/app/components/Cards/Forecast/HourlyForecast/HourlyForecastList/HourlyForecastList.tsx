@@ -32,10 +32,11 @@ export default function HourlyForecastList({
     >
       <div className={styles.titlePopupCont}>
         {/*Title*/}
-        <h3 id="hourlyForecastId" className={styles.title}>
+        <h2 id="hourlyForecastId" className={styles.title}>
           Hourly forecast
-        </h3>
+        </h2>
 
+        {/*Day pop up*/}
         <Days />
       </div>
 
