@@ -16,6 +16,7 @@ CSS Module for Temperature component
 
 /*temperature location*/
 .location {
+  font-weight: bold;
   font-size: 1.75rem; /*28px*/
 }
 

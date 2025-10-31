@@ -65,12 +65,14 @@ export type ForecastListProps = {
 
 /**
  * Props for the HourForecast component
- * @property day        - day of the week description
+ * @property id          - id to be used for data-testid
+ * @property day         - day of the week description
  * @property weatherImg  - weather icon image path
  * @property hour        - hour value
  * @property temperature - temperature value
  */
 export type HourForecastProps = {
+  id: string;
   day: string;
   weatherImg: string;
   hour: string;

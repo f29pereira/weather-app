@@ -27,31 +27,40 @@ export default function Weather() {
 
   const dataIndex = isMetric ? 0 : 1; //weatherData.weather index (0 - metric / 1 - imperial)
 
-  if (error) {
-    return <Error title={error?.title} message={error?.message} />;
-  }
-
   return (
     <section>
-      <header>
-        <h1 className={`text-center ${styles.title}`}>
-          How&apos;s the sky looking today?
-        </h1>
-      </header>
+      {!error ? (
+        <>
+          <header>
+            <h1 className={`text-center ${styles.title}`}>
+              How&apos;s the sky looking today?
+            </h1>
+          </header>
 
-      <Search />
+          {/*Search component*/}
+          <Search />
+        </>
+      ) : null}
 
-      {isLocationFound === false ? (
-        <div className={styles.notFoundCont}>
+      {/*Error message*/}
+      <div aria-live="assertive" aria-atomic="true">
+        {error ? <Error title={error.title} message={error?.message} /> : null}
+      </div>
+
+      {/*Location not found message*/}
+      <div aria-live="assertive" aria-atomic="true">
+        {isLocationFound === false ? (
           <p className={`text-center ${styles.notFoundText}`}>
             No search result found!
           </p>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
 
-      {isLocationFound === true ? (
+      {/*Weather data*/}
+      {isLocationFound === true && !error ? (
         <div className={styles.weatherDataCont}>
           <div className={styles.tempsDailyCont}>
+            {/*Temperature component*/}
             {isLoading ? (
               <TemperatureSkeleton />
             ) : (
@@ -67,6 +76,7 @@ export default function Weather() {
               />
             )}
 
+            {/*WeatherInfo component*/}
             {isLoading ? (
               <WeatherInfo
                 feelTemperature="-"
@@ -87,6 +97,7 @@ export default function Weather() {
               />
             )}
 
+            {/*ForecastList component*/}
             {isLoading ? (
               <ForecastList forecastList={dummyDailyList} />
             ) : (
@@ -99,6 +110,7 @@ export default function Weather() {
             )}
           </div>
 
+          {/*HourlyForecastList*/}
           <div className={styles.hourlyCont}>
             {isLoading ? (
               <HourlyForecastList hourlyForecastList={dummyHourlyList} />

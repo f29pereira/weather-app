@@ -12,12 +12,13 @@ import { useWeather } from "../hooks/useWeather";
  * Props are defined in {@link ErrorProps}.
  */
 export default function Error({ title, message }: ErrorProps) {
-  const { setError, setIsLoading } = useWeather();
+  const { setError, setIsLocationFound, setIsLoading } = useWeather();
 
   /**
    * Resets the current error
    */
   const onRetry = () => {
+    setIsLocationFound(null); //reset location
     setIsLoading(false); //reset loading state
     setError(null); //reset error state
   };

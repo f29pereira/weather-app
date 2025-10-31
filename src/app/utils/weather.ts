@@ -83,9 +83,8 @@ export const fetchLocation = async (location: string): Promise<Location> => {
     locationData.longitude = result.longitude;
     locationData.description = result.name + ", " + result.country;
     locationData.date = getDate();
+    locationData.days = getSixDaysOfWeek();
   }
-
-  locationData.days = getSixDaysOfWeek();
 
   return locationData;
 };
@@ -117,7 +116,7 @@ export const getWeather = async (
 /**
  * Fetches weather data from Open-Meteo API
  */
-const fetchWeatherData = async (
+export const fetchWeatherData = async (
   latitude: string,
   longitude: string,
   unit: "metric" | "imperial"
@@ -190,6 +189,7 @@ const fetchWeatherData = async (
     weatherObj.hourlyForecastList = weatherData.hourly.time.map(
       (time: string, index: number) => {
         return {
+          id: index.toString(),
           day: getDayOfWeek(time, "long"),
           weatherImg: getWeatherImagePath(
             weatherData.hourly.weathercode[index]
@@ -256,6 +256,7 @@ export const getLoadingDailyForecast = (): DayForecastProps[] => {
  */
 export const getLoadingHourlyForecast = (): HourForecastProps[] => {
   const dummyHourly: HourForecastProps = {
+    id: "",
     day: "",
     weatherImg: "",
     hour: "",
@@ -274,7 +275,7 @@ export const getLoadingHourlyForecast = (): HourForecastProps[] => {
 /**
  * Returns the weather image path based of the weatherCode from Open-Meteo API
  */
-const getWeatherImagePath = (weatherCode: number): string => {
+export const getWeatherImagePath = (weatherCode: number): string => {
   switch (weatherCode) {
     //clear sky
     case 0:
@@ -324,4 +325,24 @@ const getWeatherImagePath = (weatherCode: number): string => {
     default:
       return "";
   }
+};
+
+/**
+ * Returns the weather image name from the given path
+ */
+export const getImageName = (path: string): string => {
+  const regex = /icon-[\w-]+/i;
+  const match = path.match(regex);
+
+  return match ? match[0] : "";
+};
+
+/**
+ * Returns the weather description from the given image path
+ */
+export const getWeatherDescription = (path: string): string => {
+  const regex = /icon-(.*)\.[^.]+$/;
+  const match = path.match(regex);
+
+  return match ? match[1].replace(/-/g, " ") : "";
 };
