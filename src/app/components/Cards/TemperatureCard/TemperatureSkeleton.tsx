@@ -11,7 +11,7 @@ export default function TemperatureSkeleton() {
         <Image
           data-testid="loading-icon"
           className={styles.loadingIcon}
-          src="/images/icons/icon-loading.svg"
+          src="images/icons/icon-loading.svg"
           width={48}
           height={48}
           alt=""

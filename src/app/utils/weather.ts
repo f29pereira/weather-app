@@ -279,27 +279,27 @@ export const getWeatherImagePath = (weatherCode: number): string => {
   switch (weatherCode) {
     //clear sky
     case 0:
-      return "/images/icons/icon-sunny.webp";
+      return "images/icons/icon-sunny.webp";
 
     //partly cloudy
     case 1:
     case 2:
-      return "/images/icons/icon-partly-cloudy.webp";
+      return "images/icons/icon-partly-cloudy.webp";
 
     //overcast
     case 3:
-      return "/images/icons/icon-overcast.webp";
+      return "images/icons/icon-overcast.webp";
 
     //fog
     case 45:
     case 46:
-      return "/images/icons/icon-fog.webp";
+      return "images/icons/icon-fog.webp";
 
     //drizzle
     case 51:
     case 53:
     case 55:
-      return "/images/icons/icon-drizzle.webp";
+      return "images/icons/icon-drizzle.webp";
 
     //Rain
     case 61:
@@ -308,19 +308,19 @@ export const getWeatherImagePath = (weatherCode: number): string => {
     case 80:
     case 81:
     case 82:
-      return "/images/icons/icon-rain.webp";
+      return "images/icons/icon-rain.webp";
 
     //snow fall
     case 71:
     case 73:
     case 75:
-      return "/images/icons/icon-snow.webp";
+      return "images/icons/icon-snow.webp";
 
     //thunderstorm
     case 95:
     case 96:
     case 99:
-      return "/images/icons/icon-storm.webp";
+      return "images/icons/icon-storm.webp";
 
     default:
       return "";

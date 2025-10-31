@@ -14,7 +14,7 @@ export default function UnitOption({ text, isSelected }: UnitOptionProps) {
       {isSelected ? (
         <Image
           className={styles.checkmark}
-          src="/images/icons/icon-checkmark.svg"
+          src="images/icons/icon-checkmark.svg"
           width={10}
           height={10}
           alt=""
