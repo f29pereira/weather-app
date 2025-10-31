@@ -25,10 +25,16 @@ export default function HourlyForecastList({
       );
 
   return (
-    <section className={styles.forecastSec}>
+    <section
+      className={styles.forecastSec}
+      role="region"
+      aria-labelledby="hourlyForecastId"
+    >
       <div className={styles.titlePopupCont}>
         {/*Title*/}
-        <h3 className={styles.title}>Hourly forecast</h3>
+        <h2 id="hourlyForecastId" className={styles.title}>
+          Hourly forecast
+        </h2>
 
         {/*Day pop up*/}
         <Days />
@@ -39,6 +45,7 @@ export default function HourlyForecastList({
         {list.map((forecast, index) => (
           <HourForecast
             key={index}
+            id={forecast.id}
             day={forecast.day}
             weatherImg={forecast.weatherImg}
             hour={forecast.hour}

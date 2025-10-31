@@ -49,7 +49,11 @@ export default function Days() {
 
   return (
     <div className={styles.daysCont}>
-      <div className={`flex-center ${styles.dayImgCont}`} onClick={togglePopUp}>
+      <div
+        data-testid="selected-day"
+        className={`flex-center ${styles.dayImgCont}`}
+        onClick={togglePopUp}
+      >
         {/*Current selected day*/}
         {weatherData?.days?.map((day, index) =>
           day.isSelected ? (
@@ -60,7 +64,7 @@ export default function Days() {
         ) ?? null}
         {/*Dropdown icon*/}
         <Image
-          src="images/icons/icon-dropdown.svg"
+          src="/images/icons/icon-dropdown.svg"
           width={16}
           height={16}
           alt=""

@@ -9,8 +9,14 @@ import DayForecast from "../DayForecast/DayForecast";
  */
 export default function ForecastList({ forecastList }: ForecastListProps) {
   return (
-    <section className={styles.forecastSec}>
-      <h3 className={styles.title}>Daily forecast</h3>
+    <section
+      className={styles.forecastSec}
+      role="region"
+      aria-labelledby="dailyForecastId"
+    >
+      <h2 id="dailyForecastId" className={styles.title}>
+        Daily forecast
+      </h2>
 
       <div className={styles.forecastGrid}>
         {forecastList.map((forecast, index) => (

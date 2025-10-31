@@ -5,11 +5,6 @@ CSS Module for Weather component
   padding: 2rem;
 }
 
-/*not found container*/
-.notFoundCont {
-  margin-top: 3rem;
-}
-
 /*not found text*/
 .notFoundText {
   font-weight: bold;
@@ -36,11 +31,6 @@ CSS Module for Weather component
   .hourlyCont {
     height: 100%;
     overflow: hidden;
-  }
-
-  /*not found container*/
-  .notFoundCont {
-    margin-top: 4rem;
   }
 
   /*not found text*/

@@ -1,6 +1,7 @@
 import styles from "./DayForecast.module.css";
 import type { DayForecastProps } from "@/app/components/types";
 import Image from "next/image";
+import { getWeatherDescription } from "@/app/utils/weather";
 
 /**
  * Renders a card with:
@@ -17,26 +18,38 @@ export default function DayForecast({
   maxTemp,
   minTemp,
 }: DayForecastProps) {
+  const weather = getWeatherDescription(weatherImg);
+
   return (
-    <div className={`flex-col-center ${styles.dayForecastCont}`}>
+    <div
+      className={`flex-col-center ${styles.dayForecastCont}`}
+      data-testid={`${day}-forecast`}
+    >
       {/*Day of the week*/}
-      <h3 className={styles.title}>{day}</h3>
+      <p className={styles.title}>{day}</p>
 
       {/*Weather icon*/}
       {weatherImg === "" ? null : (
         <Image
+          data-testid="forecast-weather-icon"
           className={styles.imgWeather}
           src={weatherImg}
           width={48}
           height={48}
-          alt="Weather Icon"
+          alt={`Weather is ${weather}`}
         />
       )}
 
       {/*Temperatures*/}
       <div className={styles.tempsCont}>
-        <span className={styles.maxTemp}>{maxTemp}</span>
-        <span className={styles.minTemp}>{minTemp}</span>
+        <div>
+          <span className="sr-only">Max Temperature</span>
+          <span className={styles.maxTemp}>{maxTemp}</span>
+        </div>
+        <div>
+          <span className="sr-only">Min Temperature</span>
+          <span className={styles.minTemp}>{minTemp}</span>
+        </div>
       </div>
     </div>
   );
