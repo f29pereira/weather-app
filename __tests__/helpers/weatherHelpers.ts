@@ -18,13 +18,10 @@ export const checkTemperature = (
   const currentWeatherUnit = isMetricUnit ? weather[0] : weather[1]; // metric or imperial data
 
   // Main container
-  const temperatureContainer = screen.getByTestId("temperature");
+  const temperatureContainer = screen.getByRole("region", { name: "Weather" });
 
   // Values
-  const location = within(temperatureContainer).getByRole("heading", {
-    level: 2,
-    name: description,
-  });
+  const location = within(temperatureContainer).getByText(description);
   const dateValue = within(temperatureContainer).getByText(
     new RegExp(date, "i")
   );
@@ -59,7 +56,9 @@ export const checkWeatherInfo = (
   const currentWeatherUnit = isMetricUnit ? weather[0] : weather[1]; // metric or imperial data
 
   // Main container
-  const weatherInfoContainer = screen.getByTestId("weatherInfo");
+  const weatherInfoContainer = screen.getByRole("region", {
+    name: "Weather information",
+  });
 
   // Values
   const feelTemperature = within(weatherInfoContainer).getByText(
@@ -87,7 +86,7 @@ export const checkWeatherInfo = (
  */
 export const checkForecastList = (forecastList: DayForecastProps[]) => {
   const title = screen.getByRole("heading", {
-    level: 3,
+    level: 2,
     name: /Daily forecast/i,
   });
 
@@ -98,10 +97,7 @@ export const checkForecastList = (forecastList: DayForecastProps[]) => {
   forecastList.forEach((forecast) => {
     const dayForecastContainer = screen.getByTestId(`${forecast.day}-forecast`);
 
-    const dayDescription = within(dayForecastContainer).getByRole("heading", {
-      level: 2,
-      name: new RegExp(forecast.day, "i"),
-    });
+    const dayDescription = within(dayForecastContainer).getByText(forecast.day);
 
     const weatherIconName = getImageName(forecast.weatherImg);
     const image = within(dayForecastContainer).getByTestId(
@@ -116,12 +112,7 @@ export const checkForecastList = (forecastList: DayForecastProps[]) => {
     );
 
     expect(dayDescription).toBeInTheDocument();
-    expect(image).toHaveAttribute(
-      "src",
-      expect.stringMatching(
-        new RegExp(`_next/image\\?url=.*${weatherIconName}\\.webp`)
-      )
-    ); // Match Next.js Image component src
+    checkImage(image, weatherIconName);
     expect(maxTemperature).toBeInTheDocument();
     expect(minTemperature).toBeInTheDocument();
   });
@@ -135,7 +126,7 @@ export const checkHourlyForecastList = (
   selectedDay: Day | undefined
 ) => {
   const title = screen.getByRole("heading", {
-    level: 3,
+    level: 2,
     name: /Hourly forecast/i,
   });
 
@@ -163,14 +154,19 @@ export const checkHourlyForecastList = (
       new RegExp(forecast.temperature, "i")
     );
 
-    expect(image).toHaveAttribute(
-      "src",
-      expect.stringMatching(
-        new RegExp(`_next/image\\?url=.*${weatherIconName}\\.webp`)
-      )
-    ); // Match Next.js Image component src
+    checkImage(image, weatherIconName);
     expect(selectedDayContainer.textContent).toBe(selectedDay?.name);
     expect(hourValue).toBeInTheDocument();
     expect(temperature).toBeInTheDocument();
   });
+};
+
+/**
+ * Helper function: checks image existence
+ */
+const checkImage = (image: HTMLElement, imageName: string) => {
+  expect(image).toHaveAttribute(
+    "src",
+    expect.stringMatching(new RegExp(`_next/image\\?url=.*${imageName}\\.webp`))
+  ); // Match Next.js Image component src
 };
