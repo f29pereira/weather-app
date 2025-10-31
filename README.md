@@ -7,6 +7,7 @@ This is a solution to the [Weather app challenge on Frontend Mentor](https://www
 - [Overview](#overview)
   - [The challenge](#the-challenge)
   - [Screenshots](#screenshot)
+  - [Tests](#tests)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -97,6 +98,39 @@ Users should be able to:
 
      ![forecast day toggle](public/images/readme/hover/day_toggle.png)
 
+### Tests
+
+**Unit and Integration Tests**
+
+This project uses Jest and React Testing Library for unit and integration testing.
+
+The unit tests cover:
+
+- Auxiliary functions used in the application
+- The rendering of the components Search, Temperature, WeatherInfo, ForecastList and HourlyForecastList, with the expected data
+
+The integration test cover:
+
+- The rendering of error message and retry button when the location provided by the user is invalid
+- The rendering of error title and message (Error component) when API fetching fails
+- The rendering of all related weather components when data is fetched sucessfully
+
+**Accessibility Tests**
+
+1. Automated Tests
+
+- Run Lighthouse audits in Chrome and Edge DevTools (100 value score).
+
+2. Manual Tests
+
+- Screen Reader testing with NVDA:
+
+  - Checked that headings (h1, h2) are announced correctly.
+  - Checked that regions are announced correctly.
+  - Checked that search location form label, input, and submit button are read when focused.
+
+- Completed the search location form and page navigation only using the keyboard.
+
 ### Links
 
 - Solution URL: [https://github.com/f29pereira/weather-app](https://github.com/f29pereira/weather-app)
@@ -113,6 +147,10 @@ Users should be able to:
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
+- [Jest](https://jestjs.io/) - JS testing library
+- [React Testing Library](https://testing-library.com/) - React components testing library
+- [user-event](https://www.npmjs.com/package/@testing-library/user-event) - companion library of React Testing Library
+- [NVDA (NonVisual Desktop Access)](https://www.nvaccess.org/) - open-source screen reader for Windows
 
 ## Author
 
